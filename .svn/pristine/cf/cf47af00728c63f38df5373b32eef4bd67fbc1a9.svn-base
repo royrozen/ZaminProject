@@ -1,0 +1,58 @@
+(function () {
+  'use strict';
+
+  /**
+   * @ngdoc object
+   * @name registration.controller:RegistrationCtrl
+   *
+   * @description
+   *
+   */
+  angular
+    .module('registration')
+    .controller('RegistrationCtrl', RegistrationCtrl);
+
+  function RegistrationCtrl($scope, $rootScope, $location,Registration ) {
+    $scope.signupInfo = {
+        isMale: "true",
+        UserType : 1
+    };
+      $scope.wrongPassword = false;
+      $scope.passwordTooShort = false;
+      $scope.emailExists = false;
+
+      $scope.signUp = function () {
+            $scope.emailExists = false;
+              // $scope.businessNumberExists = false;
+              $scope.passwordTooShort = false;
+              $scope.wrongPassword = false;
+              if ($scope.signupInfo.FirstName == undefined || $scope.signupInfo.LastName == undefined || $scope.signupInfo.Email == undefined || $scope.signupInfo.Password == undefined || $scope.signupInfo.Phone == undefined) {
+                  return;
+              }
+              if ($scope.signupInfo.Password !== $scope.signupInfo.ConfirmPassword) {
+                  $scope.signupInfo.ConfirmPassword = null;
+                  $scope.wrongPassword = true;
+                  return;
+              }
+              if ($scope.signupInfo.Password.length < 6) {
+                  $scope.passwordTooShort = true;
+                  return;
+              }
+
+              showLoader();
+              Registration.signUp($scope.signupInfo).then(function (response) {
+                  if (response.data.message === "user name exists") {
+                      $scope.emailExists = true;
+                  } else if (response.data.message === true) {
+                      $scope.isLogedIn = true;
+                      $scope.userName = response.userName;
+                      // $rootScope.$broadcast("userSingedUp", response.userName);
+                      //$location.path("account");
+                  }
+                  hideLoader();
+              });
+          }
+
+
+  }
+}());

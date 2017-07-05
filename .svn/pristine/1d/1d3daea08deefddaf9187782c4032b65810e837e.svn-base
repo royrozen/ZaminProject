@@ -1,0 +1,144 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Security;
+using Zamin.Models;
+using Zamin.Models.General;
+using Zamin.Repositories.CFMembership;
+using Zamin.WebModels;
+
+namespace Zamin.Server.Controllers
+{
+    public class AccountController : BaseController
+    {
+        [HttpPost]
+        public JsonResult Login(string userName, string password)
+        {
+            var cfMembershipProvides = new CodeFirstMembershipProvider();
+            var validateUser = cfMembershipProvides.ValidateUser(userName, password);
+            if (!validateUser)
+            {
+                return new JsonResult()
+                {
+                    Data = new
+                    {
+                        Success = false
+                    }
+                };
+            }
+
+            FormsAuthentication.SetAuthCookie(userName, true);
+            var user = UOW.UsersRepository.GetUser(userName);
+            return new JsonResult()
+            {
+                Data = new
+                {
+                    Success = true,
+                    Id = user.Id,
+                    userName = user.Email,
+                }
+            };
+        }
+
+        public JsonResult WebsiteLogin(string userName, string password)
+        {
+            var user = UOW.WebUserRepository.WebsiteLogin(userName, password);
+            if (user == null)
+            {
+                return new JsonResult()
+                {
+                    Data = new
+                    {
+                        success = false
+                    }
+                };
+            }
+            
+            return new JsonResult()
+            {
+              Data = new
+              {
+                  success = true,
+                  user 
+              }
+            };
+        }
+
+        public JsonResult LogOff()
+        {
+            FormsAuthentication.SignOut();
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCurrentUserName()
+        {
+            if (!User.Identity.IsAuthenticated) return Json(string.Empty, JsonRequestBehavior.AllowGet);
+
+            var userName = string.Format("{0} {1}", CurrentUser.FirstName, CurrentUser.LastName);
+            if (string.IsNullOrWhiteSpace(userName))
+            {
+                userName = CurrentUser.Username;
+            }
+            return Json(userName, JsonRequestBehavior.AllowGet);
+        }
+
+
+        [HttpPost]
+        public JsonResult SignUp(WebsiteUserWebModel websiteUser)
+        {
+            var isUserExists = UOW.UsersRepository.IsEmailExists(websiteUser.Email);
+            if (isUserExists)
+            {
+                return new JsonResult()
+                {
+                    Data = new
+                    {
+                        message = "user name exists"
+                    }
+                };
+            }
+            var dbModel = AutoMapper.Mapper.Map<WebsiteUserWebModel, WebsiteUser>(websiteUser);
+            dbModel.Tags = new List<Tag>();
+           
+
+            dbModel.Password = Crypto.HashPassword(websiteUser.Password);
+            dbModel.CreateDate = DateTime.Now;
+            dbModel.LoginToken = Guid.NewGuid().ToString();
+            dbModel.IsActive = true;
+
+
+
+            UOW.UsersRepository.AddOrUpdateUser(dbModel, websiteUser.Tags);
+
+
+            var text = "ברוך הבא למערכת";
+            var sentEmail = Helper.EmailHelper.SendContactUsEmail(websiteUser.Email, text, dbModel);
+
+            return new JsonResult()
+           {
+               Data = new
+               {
+                   message = true,
+                   user = AutoMapper.Mapper.Map<WebsiteUser, WebsiteUserWebModel>(dbModel),
+                   loginToken = dbModel.LoginToken
+               }
+           };
+        }
+
+        [HttpGet]
+        public JsonResult GetCurrentUserByLoginToken(string loginToken)
+        {
+            var websiteUser = UOW.WebUserRepository.GetCurrentUserByLoginToken(loginToken);
+            var webModel = AutoMapper.Mapper.Map<WebsiteUser, WebsiteUserWebModel>(websiteUser);
+            return Json(webModel, JsonRequestBehavior.AllowGet);
+        }
+
+        public HttpUnauthorizedResult NotAuthorized()
+        {
+            return new HttpUnauthorizedResult();
+        }
+
+    }
+}

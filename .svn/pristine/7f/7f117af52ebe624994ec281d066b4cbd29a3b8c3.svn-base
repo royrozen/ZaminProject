@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Zamin.Enums;
+using Zamin.Helpers;
+using Zamin.Models.Content;
+using Zamin.WebModels;
+
+namespace Zamin.Repositories
+{
+    public class ArticleRepository : RepositoryBase<DataContext>, IArticleRepository
+    {
+          public ArticleRepository()
+        {
+
+        }
+
+          public ArticleRepository(DataContext dataContext)
+            : base(dataContext)
+        {
+
+        }
+
+        public List<Article> GetArticles()
+        {
+            return DataContext.Article.Where(a => a.IsActive).ToList();
+        }
+
+        public Article GetArticle(int articleId)
+        {
+            return DataContext.Article.Include(a=>a.Tags).FirstOrDefault(a => a.Id == articleId);
+        }
+
+        public bool CreateArticle(ArticleWebModel article)
+        {
+            var dbModel = AutoMapper.Mapper.Map<ArticleWebModel, Article>(article);
+
+          //Save tags
+          if (article.Tags != null)
+          {
+              foreach (var tagWebModel in article.Tags)
+              {
+                  dbModel.Tags.Add(DataContext.Tags.First(t => t.Id == tagWebModel.Id));
+              }
+          }
+
+
+            //Save image file
+            var fileType = article.File.FileName.Split('.');
+
+            var fileName = Guid.NewGuid() + "."+ fileType[fileType.Length - 1];
+          dbModel.FileUrl = fileName;
+          dbModel.IsActive = true;
+          dbModel.CreateDate=DateTime.Now;
+          FileHelper.SaveFile(article.File, DirectoriesEnum.Articles, fileName);
+
+          DataContext.Article.Add(dbModel);
+          return Save();
+      }
+
+        public bool DeleteArticle(int articleId)
+        {
+            var article = DataContext.Article.FirstOrDefault(a => a.Id == articleId);
+            if (article == null) return false;
+
+            article.IsActive = false;
+            return Save();
+        }
+
+        public bool UpdateArticle(ArticleWebModel article)
+        {
+            var dbModel = DataContext.Article.Include(p => p.Tags).SingleOrDefault(a => a.Id == article.Id);
+            if (dbModel == null) return false;
+            var fileUrl = dbModel.FileUrl;
+
+            AutoMapper.Mapper.Map(article, dbModel);
+            
+            //save Tags
+            if (article.Tags != null && article.Tags.Count > 0)
+            {
+                foreach (var tagDb in dbModel.Tags.ToList())
+                {
+                    //Doesnt exist in webModel (removed by client)
+                    if (!article.Tags.Any(t => t.Id == tagDb.Id))
+                    {
+                        dbModel.Tags.Remove(tagDb);
+                    }
+                }
+                foreach (var tagWebModel in article.Tags.ToList())
+                {
+                    //Doesnt exist in db (added by client)
+                    if (!dbModel.Tags.Any(t => t.Id == tagWebModel.Id))
+                    {
+                        dbModel.Tags.Add(DataContext.Tags.First(t => t.Id == tagWebModel.Id));
+                    }
+                }
+            }
+            else //All tags were deleted
+            {
+                foreach (var tag in dbModel.Tags.ToList())
+                {
+                    dbModel.Tags.Remove(tag);
+                }
+            }
+            dbModel.FileUrl = fileUrl;
+            if (article.File != null)
+            {
+                var fileType = article.File.FileName.Split('.');
+                var fileName = Guid.NewGuid() + "." + fileType[fileType.Length - 1];
+                dbModel.FileUrl = fileName;
+                dbModel.CreateDate = DateTime.Now;
+               dbModel.IsActive = true;
+                FileHelper.SaveFile(article.File, DirectoriesEnum.Articles, fileName);
+            }
+            
+            return Save();
+        }
+    }
+}

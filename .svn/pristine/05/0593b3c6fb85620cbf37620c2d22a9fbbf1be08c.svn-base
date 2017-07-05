@@ -1,0 +1,72 @@
+
+
+/*Main Page*/
+
+.top-slider img{
+    width: 100% !important;
+}
+.aboutUs{
+  position: absolute;
+  top:60vh;
+}
+.top-slider h2{
+   position: absolute;
+   top: 200px;
+   right: 0;
+   width: 100%;
+   padding-right:5%;
+}
+.top-article{
+	text-align: center;
+}
+.section-header{
+	border-radius:4px;
+	color:#444;
+}
+h5.header.center {
+    padding-top: 10px;
+    color:#ff9800;
+}
+p.top-article {
+    padding-bottom: 10px;
+}
+.article-preview-left{
+	float:right;
+	padding-top: 15px;
+    padding-bottom: 15px;
+}
+.article-preview-right{
+	padding-top: 20px;
+    padding-bottom: 15px;
+}
+.article-preview-right img {
+    max-width: 100%;
+}
+.article-preview-left img {
+    max-width: 100%;
+}
+
+/*Profile page*/
+.history.col.l4.s12 {
+    float: right;
+}
+
+.sudgest h5{
+	text-align:center;
+}
+.row.sudgest {
+	padding-bottom: 30px;
+    border-bottom: 1px #cacaca solid;
+}
+.profile h5{
+	    text-align: center;
+}
+/*responsive*/
+@media (max-width: 987px)
+{
+.article-preview-left img,
+.article-preview-right img{
+  display:none;
+}
+
+}

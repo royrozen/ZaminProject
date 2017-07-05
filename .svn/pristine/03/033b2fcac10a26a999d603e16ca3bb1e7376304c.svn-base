@@ -1,0 +1,19 @@
+(function () {
+  'use strict';
+
+  /**
+   * @ngdoc object
+   * @name article.controller:ArticleCtrl
+   *
+   * @description
+   *
+   */
+  angular
+    .module('article')
+    .controller('ArticleCtrl', ArticleCtrl);
+
+  function ArticleCtrl() {
+    var vm = this;
+    vm.ctrlName = 'ArticleCtrl';
+  }
+}());

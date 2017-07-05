@@ -1,0 +1,26 @@
+<md-dialog class="login-dialog">
+  <i style="text-align: left;cursor: pointer" class="fa fa-times" ng-click="hideDialog()"></i>
+  <h2>כניסה
+  </h2>
+
+  <form name="login-form">
+    <md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+      <div>
+        <md-input-container>
+          <label>אימייל</label>
+          <input ng-model="user.email" type="email" required>
+        </md-input-container>
+
+        <md-input-container>
+          <label>סיסמא</label>
+          <input ng-model="user.password" type="password" required>
+        </md-input-container>
+      </div>
+    </md-content>
+    <button type="submit" ng-click="login(user.email, user.password)" class="md-button md-raised">היכנס</button>
+      <button ng-click="goTo('registration');hideDialog()" class="md-button md-raised">עדיין לא רשום? הירשם כעת</button>
+    <div style="color: red" ng-show="loginFailed">
+      אימייל או סיסמא לא נכונים
+    </div>
+  </form>
+</md-dialog>

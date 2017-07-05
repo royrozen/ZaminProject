@@ -1,0 +1,120 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Zamin.Enums;
+using Zamin.Helpers;
+using Zamin.Models.Content;
+using Zamin.WebModels;
+
+namespace Zamin.Repositories
+{
+    public class LessonPlanRepository : RepositoryBase<DataContext>, ILessonPlanRepository
+   {
+        public LessonPlanRepository()
+        {
+
+        }
+
+        public LessonPlanRepository(DataContext dataContext)
+            : base(dataContext)
+        {
+
+        }
+
+
+        public List<LessonPlan> GetLessonPlans()
+      {
+
+          return DataContext.LessonPlan.Where(l => l.IsActive).ToList();
+      }
+
+        public LessonPlan GetLessonPlan(int lessonPlanId)
+      {
+
+          return DataContext.LessonPlan.Include(l => l.Tags).FirstOrDefault(l => l.Id == lessonPlanId);
+
+      }
+
+        public bool CreateLessonPlan(LessonPlanWebModel lessonPlan)
+      {
+          var dbModel = AutoMapper.Mapper.Map<LessonPlanWebModel, LessonPlan>(lessonPlan);
+      
+
+          //Save tags
+          if (lessonPlan.Tags != null)
+          {
+              foreach (var tagWebModel in lessonPlan.Tags)
+              {
+                  dbModel.Tags.Add(DataContext.Tags.First(t => t.Id == tagWebModel.Id));
+              }
+          }
+
+          ////Save image file
+          //var fileName = Guid.NewGuid() + ".png";
+          //dbModel.ImageFileName = fileName;
+          //FileHelper.SaveFile(lessonPlan.ImageFile, DirectoriesEnum.Posters, fileName);
+          dbModel.CreateDate=DateTime.Now;
+          dbModel.IsActive= true;
+
+          DataContext.LessonPlan.Add(dbModel);
+          return Save();
+      }
+
+        public bool DeleteLessonPlan(int lessonPlanId)
+      {
+          var lessonPlan = DataContext.LessonPlan.FirstOrDefault(p => p.Id == lessonPlanId);
+          if (lessonPlan == null) return false;
+
+          lessonPlan.IsActive= false;
+          return Save();
+
+      }
+
+        public bool UpdateLessonPlan(LessonPlanWebModel lessonPlan)
+      {
+          var dbModel = DataContext.LessonPlan.Include(l => l.Tags).SingleOrDefault(l => l.Id == lessonPlan.Id);
+          if (dbModel == null) return false;
+
+          AutoMapper.Mapper.Map(lessonPlan, dbModel);
+
+          //save Tags
+          if (lessonPlan.Tags != null && lessonPlan.Tags.Count > 0)
+          {
+              foreach (var tagDb in dbModel.Tags.ToList())
+              {
+                  //Doesnt exist in webModel (removed by client)
+                  if (!lessonPlan.Tags.Any(t => t.Id == tagDb.Id))
+                  {
+                      dbModel.Tags.Remove(tagDb);
+                  }
+              }
+              foreach (var tagWebModel in lessonPlan.Tags.ToList())
+              {
+                  //Doesnt exist in db (added by client)
+                  if (!dbModel.Tags.Any(t => t.Id == tagWebModel.Id))
+                  {
+                      dbModel.Tags.Add(DataContext.Tags.First(t => t.Id == tagWebModel.Id));
+                  }
+              }
+          }
+          else //All tags were deleted
+          {
+              foreach (var tag in dbModel.Tags.ToList())
+              {
+                  dbModel.Tags.Remove(tag);
+              }
+          }
+          //if (lessonPlan.ImageFile != null)
+          //{
+          //    var fileName = Guid.NewGuid() + ".png";
+          //    dbModel.ImageFileName = fileName;
+          //    dbModel.Active = true;
+          //    FileHelper.SaveFile(lessonPlan.ImageFile, DirectoriesEnum.Courses, fileName);
+          //}
+          return Save();
+      }
+  }
+}

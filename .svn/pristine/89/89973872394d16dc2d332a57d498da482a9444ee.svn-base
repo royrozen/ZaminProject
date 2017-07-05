@@ -1,0 +1,38 @@
+(function () {
+  'use strict';
+
+  /**
+   * @ngdoc service
+   * @name article.factory:Article
+   *
+   * @description
+   *
+   */
+  angular
+    .module('article')
+    .factory('Article', Article);
+
+  function Article($http,consts) {
+    var ArticleBase = {};
+
+    ArticleBase.getAll = function () {
+        return $http({
+          method: "GET",
+          url: consts.serverUrl + "Article/GetArticles",
+        });
+      };
+
+
+      ArticleBase.delete = function(articleId) {
+        return $http({
+          method: "POST",
+          url: consts.serverUrl + "Article/DeleteArticle",
+          data: {
+            articleId: articleId
+          }
+        });
+      };
+
+    return ArticleBase;
+  }
+}());

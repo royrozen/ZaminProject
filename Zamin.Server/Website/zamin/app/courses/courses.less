@@ -1,0 +1,66 @@
+@mainGreen : #7fb63f;
+@mainLightRed : #ff3366;
+@mainGrey : #626264;
+@mainLightGrey:#ececec;
+
+md-card md-card-content .md-media-xl{
+  height: 64px;
+}
+md-card-title-text {}
+
+.md-toolbar-tools {
+  h2{
+    color:white;
+    // margin-right: 4%;
+  }
+  .videsCounter{
+    md-icon{color:white}
+    span{color:white;}
+  }
+
+}
+md-list-item{
+    p{
+      left: 0;
+      right: 0;
+      margin: auto;
+      text-align: right;
+    }
+}
+
+md-list-item:hover {
+  background-color: rgba(76, 175, 80, 0.4);
+  cursor: pointer;
+}
+
+.navIcons {
+    margin: 20px;
+}
+
+/* ----- list item active -----*/
+.nav-active {
+  background-color: @mainGreen;
+  color: @mainLightGrey;
+}
+
+.nav-active md-icon {
+  color: @mainLightGrey;
+}
+.videoCardContent {
+  // text-align: center;
+  // padding: 0;
+  // overflow: hidden;
+  // text-overflow: ellipsis;
+
+    width:220px;
+    height:40px;
+    display: block; /* Fallback for non-webkit */
+    display: -webkit-box;
+    text-align: center;
+    padding: 0;
+    margin: 0 auto;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

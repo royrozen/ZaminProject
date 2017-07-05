@@ -1,0 +1,17 @@
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\Zamin.Helper.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\Zamin.Helper.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\Zamin.Consts.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\Zamin.Enums.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\Zamin.Consts.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\Zamin.Enums.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\obj\Debug\Zamin.Helpers.csprojResolveAssemblyReference.cache
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\obj\Debug\Zamin.Helper.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\obj\Debug\Zamin.Helper.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\Zamin.Models.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\Zamin.Models.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\AWSSDK.Core.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\AWSSDK.SimpleEmail.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\AWSSDK.Core.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\AWSSDK.Core.xml
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\AWSSDK.SimpleEmail.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Helper\bin\Debug\AWSSDK.SimpleEmail.xml

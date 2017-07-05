@@ -1,0 +1,41 @@
+<div class="sidenav-container" layout="row">
+  <div class="page-sidenav" flex="15">
+    <div ng-repeat="cat in categories" ng-class="{'active' : currentCategory.Id == cat.Id}" ng-click="selectCategory(cat)">
+      {{cat.CategoryName}}
+    </div>
+  </div>
+  <div class="page-content" flex="85">
+    <h2 ng-show="currentCourse == undefined">
+      {{currentCategory.CategoryName}} - קורסים
+    </h2>
+    <h2 ng-hide="currentCourse == undefined">
+      {{currentCourse.Name}} - שיעורים
+    </h2>
+    <div layout="row">
+      <md-card ng-repeat="course in currentCategory.Courses" ng-show="currentCourse == undefined" flex="25" ng-click="selectCourse(course)">
+        <md-card-content>
+          <h3>
+      {{course.Name}}
+      </h3>
+          <p>
+            {{course.Description}}
+          </p>
+        </md-card-content>
+      </md-card>
+    </div>
+    <div layout="row">
+      <md-card ng-repeat="lesson in lessons" ng-hide="currentCourse == undefined"  flex="25" ng-click="watchLesson(lesson, $event)">
+        <md-card-content>
+          <h3>
+      {{lesson.Name}}
+      </h3>
+          <p>
+            {{lesson.Description}}
+          </p>
+        </md-card-content>
+        <i style="outline: none;" class="fa fa-thumbs-o-up fa-2x" ng-click="likeLesson(lesson);$event.stopPropagation();"></i>
+        <span>{{lesson.NumOfLikes}}</span>
+      </md-card>
+    </div>
+  </div>
+</div>

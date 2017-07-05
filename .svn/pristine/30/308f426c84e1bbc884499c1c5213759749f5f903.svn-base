@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en' data-ng-app='zaminAdmin'>
+  <head>
+    <title>מסך ניהול לפלטפורמת תוכן "זמין"</title>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes'>
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- inject:head:js -->
+    <!-- endinject -->
+    <!-- inject:html -->
+    <!-- endinject -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- inject:css -->
+    <!-- endinject -->
+  </head>
+  <body>
+    <div layout="row" layout-align="right" flex class="view" ng-controller="AppCtrl">
+          <md-content flex layout-padding md-whiteframe="4" md-margin class="main-container">
+              <div class="main-ui-view" data-ui-view="mainView"></div>
+          </md-content>
+          <div data-ui-view="menuView" class="menuView"></div>
+      </div>
+      <!-- loader -->
+<div id="loader">
+  <div class="bubblingG">
+    <span id="bubblingG_1">
+</span>
+    <span id="bubblingG_2">
+</span>
+    <span id="bubblingG_3">
+</span>
+  </div>
+</div>
+<!-- endLoader -->
+
+    <!-- bower:js -->
+    <!-- endbower -->
+    <!-- inject:js -->
+    <!-- endinject -->
+  </body>
+</html>

@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Zamin.Server.Controllers
+{
+    public class MarketingController : BaseController
+    {
+
+
+        [HttpGet]
+        public JsonResult SendMessageToClients(string emailAddress, string message, string subject)
+        {
+            string messageAfterAdjasment = Regex.Replace(message, @"\r\n?|\n", "<br />");
+            var sentEmail = Helper.EmailHelper.SendContactUsEmail(emailAddress, messageAfterAdjasment, subject);
+
+            return Json(sentEmail, JsonRequestBehavior.AllowGet);
+        }
+        //public JsonResult SendPushNotificationToClients(int userType, string message, string title)
+        //{
+        //    //var appUsers = UOW.UsersRepository.GetUsersToSendPush(franchiseId);
+        //    //var success = true;
+        //    //foreach (var user in appUsers)
+        //    //{
+        //    //    success = Helpers.PushHelper.SendSingle(user.PushToken, message, title);
+        //    //}
+        //    //return Json(success);
+        //    return Json(true);
+        //}
+
+        public JsonResult SendAppLinkToCustomer(int franchiseId, string phoneNumber)
+        {
+            //var appInstalationLink = UOW.FranchiseRepository.GetAppInstalationLink(franchiseId);
+
+
+            //var success = Helpers.SmsHelper.SendAppLink(franchiseId, phoneNumber, appInstalationLink);
+            //return Json(success);
+            return Json(true);
+
+        }
+    }
+}

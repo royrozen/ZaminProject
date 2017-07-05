@@ -1,0 +1,7 @@
+<md-dialog>
+  <div class="modal-dialog" style="    width: 63vw;    margin: auto;">
+    <div class="modal-body text-center">
+      <img ng-src="{{currentImage}}" style="width: 100% ;"/>
+    </div>
+  </div>
+</md-dialog>

@@ -1,0 +1,23 @@
+(function () {
+  'use strict';
+
+  /**
+   * @ngdoc service
+   * @name teenVideos.factory:TeenVideos
+   *
+   * @description
+   *
+   */
+  angular
+    .module('teenVideos')
+    .factory('TeenVideos', TeenVideos);
+
+  function TeenVideos() {
+    var TeenVideosBase = {};
+    TeenVideosBase.someValue = 'TeenVideos';
+    TeenVideosBase.someMethod = function () {
+      return 'TeenVideos';
+    };
+    return TeenVideosBase;
+  }
+}());

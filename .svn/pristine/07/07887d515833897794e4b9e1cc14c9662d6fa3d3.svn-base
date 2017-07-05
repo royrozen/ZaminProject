@@ -1,0 +1,89 @@
+(function () {
+  'use strict';
+
+  /**
+   * @ngdoc object
+   * @name videoForm.controller:VideoFormCtrl
+   *
+   * @description
+   *
+   */
+  angular
+    .module('videoForm')
+    .controller('VideoFormCtrl', VideoFormCtrl);
+
+  function VideoFormCtrl($scope, $rootScope, $location, $mdDialog, $state, $stateParams,VideoForm,Tags) {
+    $scope.tags = [];
+
+      $scope.imageVersion = 1;
+      $scope.video = {
+        'videotype': $stateParams.videotype
+      };
+      $scope.editMode = $state.current.name == 'videoFormEdit';
+
+      //---------------Get functions---------------------
+      $scope.getVideo = function() {
+        showLoader();
+        VideoForm.getVideo($stateParams.videoId).then(function(response) {
+          $scope.video = response.data;
+          $scope.getTags();
+          hideLoader();
+        });
+      }
+
+      $scope.getTags = function() {
+        showLoader();
+        Tags.getAll().then(function(response) {
+          $scope.tags = response.data;
+          $scope.setVideoTags($scope.video);
+          hideLoader();
+        });
+      }
+
+      //---------------Post functions--------------------
+
+      $scope.save = function(valid) {
+        if (!valid) return;
+        showLoader();
+        VideoForm.save($scope.video).then(function(response) {
+          hideLoader();
+          if (response.data) {
+            $location.path($scope.video.videotype);   //TODO check which type to go back to
+          }
+        });
+      }
+      //Tags autocomplete
+      $scope.searchText = "";
+      $scope.selectedItem = undefined;
+
+      $scope.transformChip = function(chip) {
+        // If it is an object, it's already a known chip
+        if (angular.isObject(chip)) {
+          return chip;
+        }
+
+        // Otherwise, create a new one
+        //    return { name: chip, type: 'new' }
+      }
+
+      $scope.querySearch = function(query) {
+        var results = query ? $scope.tags.filter(createFilterFor(query)) : [];
+        return results;
+      }
+
+      function createFilterFor(query) {
+        var lowercaseQuery = angular.lowercase(query);
+
+        return function filterFn(tag) {
+          return (tag.TagName.indexOf(lowercaseQuery) === 0) ||
+            (tag.TagName.indexOf(lowercaseQuery) === 0);
+        };
+      }
+
+
+      //Start
+      if ($scope.editMode) $scope.getVideo();
+        $scope.getTags();
+
+    }
+  }());

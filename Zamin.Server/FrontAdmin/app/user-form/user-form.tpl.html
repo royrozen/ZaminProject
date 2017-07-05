@@ -1,0 +1,96 @@
+<form class="userform">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 ng-show="editMode">
+        עריכה -
+        {{::user.FirstName}}
+      </h3>
+      <h3 ng-hide="editMode">
+          משתמש חדש
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div class="row form-group">
+            <label class="col-sm-2 control-label">שם פרטי</label>
+            <div class="col-sm-3">
+              <input class="form-control" type="text" ng-required="true" ng-model="user.FirstName">
+            </div>
+            <div style="color: red; font-size: 12px;" ng-show="(user.FirstName.$dirty && user.FirstName.$invalid) || (userformSubmitted && userform.FirstName.$invalid)">
+            <span ng-show="userform.FirstName.$error.required"><b>אנא הכנס שם פרטי</b></span>
+          </div>
+            <label class="col-sm-2 control-label">שם משפחה</label>
+            <div class="col-sm-3">
+              <input class="form-control" type="text" ng-required="true" ng-model="user.LastName">
+            </div>
+            <div style="color: red; font-size: 12px;" ng-show="(userform.LastName.$dirty && userform.LastName.$invalid) || (userformSubmitted && userform.LastName.$invalid)">
+          <span ng-show="userform.LastName.$error.required"><b>אנא הכנס שם משפחה</b></span>
+        </div>
+          </div>
+          <br/>
+          <div class="row form-group">
+            <label class="col-sm-2 control-label">דוא"ל</label>
+            <div class="col-sm-3">
+              <input class="form-control" required ng-model="user.Email">
+            </div>
+            <div style="color: red; font-size: 12px;" ng-show="(userform.Email.$dirty && userform.Email.$invalid) || (userformSubmitted && userform.Email.$invalid)">
+        <span ng-show="userform.Email.$error.required"><b>אנא הכנס אימייל</b></span>
+      </div>
+      <div style="color: red; font-size: 12px;" ng-show="(userform.Email.$dirty && userform.Email.$invalid) || (userformSubmitted && userform.Email.$invalid)">
+        <span ng-show="userform.Email.$error.email"><b>אימייל לא תקין</b></span>
+      </div>
+            <label class="col-sm-2 control-label">טלפון</label>
+            <div class="col-sm-3">
+              <input class="form-control" type="text" ng-model="user.Phone" />
+            </div>
+            <div style="color: red; font-size: 12px;" ng-show="(userform.Phone.$dirty && userform.Phone.$invalid) || (userformSubmitted && userform.Phone.$invalid)">
+      <span ng-show="userform.Phone.$error.required"><b>אנא הכנס מספר נייד</b></span>
+    </div>
+          </div>
+          <br />
+          <div class="row form-group">
+            <label class="col-sm-2 control-label">סיסמא</label>
+            <div class="col-sm-3">
+              <input class="form-control" type="text" required ng-model="user.Password" />
+            </div>
+
+            <label class="col-sm-2 control-label">תאריך לידה</label>
+            <div class="col-sm-3">
+
+              <mdp-date-picker mdp-format="DD/MM/YYYY" required ng-model="user.BirthdayDate"></mdp-date-picker>
+
+              <!-- <input class="form-control" type="text" ng-model="user.BirthdayDate" /> -->
+            </div>
+
+
+          </div>
+          <div class="row form-group">
+            <label class="col-sm-2 control-label">סוג משתמש</label>
+            <md-select class="col-sm-3 no-margin" required ng-model="user.UserTypeId" name="UserTypeId">
+              <md-option value="0">הורה</md-option>
+              <md-option value="1">מורה</md-option>
+              <md-option value="2">מדריך</md-option>
+            </md-select>
+
+
+              <label class="col-sm-2 control-label">מין</label>
+            <div class="col-sm-3">
+              <md-select class="col-sm-4 no-margin" required ng-model="user.IsMale" name="UserTypeId">
+                <md-option value="0">נקבה</md-option>
+                <md-option value="1">זכר</md-option>
+              </md-select>
+            </div>
+          </div>
+          <br/>
+
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-lg btn-success" ng-click="save();userformSubmitted = true;">
+    שמור
+  </button>
+</form>

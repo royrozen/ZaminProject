@@ -1,0 +1,48 @@
+<div id="media">
+
+   <v-accordion id="accordionA" class="vAccordion--default" control="accordionA" onexpand="expandCallback(index, id)" oncollapse="collapseCallback(index, id)">
+
+    <v-pane id="{{ ::pane.id }}" ng-repeat="pane in panes" expanded="pane.isExpanded">
+      <v-pane-header id="{{ ::pane.id }}-header" aria-controls="{{ ::pane.id }}-content">
+        <h5>{{ ::pane.header }}</h5>
+      </v-pane-header>
+
+      <v-pane-content id="{{ ::pane.id }}-content" aria-labelledby="{{ ::pane.id }}-header">
+        <p>{{ ::pane.content }}</p>
+
+
+      </v-pane-content>
+    </v-pane>
+
+  </v-accordion>
+
+
+
+  <hr>
+    <div id="articles">
+        <div ng-repeat="video in videos" class="text-center" style="outline: none;">
+            <div class="iframe-containerArticle">
+
+                <iframe ng-src="{{video.iframe}}" frameborder="0" allowfullscreen></iframe>
+                <div class="iframe-overlay">
+                    <div ng-click="openVideoModal(video.iframe, $event)" class="iframe-btn">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div id="gallery">
+        <div ng-repeat="video in videos" class="text-center" style="outline: none;">
+            <div class="iframe-containerGallery">
+
+                <iframe ng-src="{{video.iframe}}" frameborder="0" allowfullscreen></iframe>
+                <div class="iframe-overlay">
+                    <div ng-click="openVideoModal(video.iframe, $event)" class="iframe-btn">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br /><br />
+</div>

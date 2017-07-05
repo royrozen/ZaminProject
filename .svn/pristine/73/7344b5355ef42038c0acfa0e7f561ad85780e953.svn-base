@@ -1,0 +1,17 @@
+<footer class="page-footer orange" >
+
+  <a href="https://www.youtube.com/channel/UCziRTyx306Fb5VxTqi6L67A" target="_blank">
+    <img src="Images/youtube.png" />
+  </a>
+  <a href="https://www.facebook.com/lagaatbeze/" target="_blank">
+    <img src="Images/facebook.png" />
+  </a>
+  <div class="footer-copyright">
+    <div class="container mailto">
+      <a href="mailto:ZaminProject@gmail.com" target="_top">צור קשר  </a>
+    </div>
+    <div class="container center">
+    Made by <a class="orange-text text-lighten-3" href="http://hevra.haifa.ac.il/is-web/index.php/he/staff/academic?id=139">Final Project Zamin Haifa Univ  </a>
+    </div>
+  </div>
+</footer>

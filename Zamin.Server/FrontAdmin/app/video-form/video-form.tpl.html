@@ -1,0 +1,85 @@
+<form class="custom-form" name="videoForm" novalidate="">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 ng-show="editMode">
+        עריכה -
+        {{::video.Name}}
+      </h3>
+      <h3 ng-hide="editMode">
+         יצירת וידאו
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div class="row form-group">
+            <label class="col-sm-1 control-label">שם הוידאו</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" name="name" ng-model="video.Name" required="">
+              <div  class="errorMessage" ng-messages="videoForm.name.$error" ng-show="videoForm.$submitted">
+                <div ng-message="required" ng-show="videoForm.name.$error.required"> שדה זה הוא חובה.</div>
+              </div>
+            </div>
+            <div class="col-sm-1"></div>
+            <label class="col-sm-1 control-label"> תיאור</label>
+            <div class="col-sm-4">
+              <textarea class="form-control" ng-model="video.Description"></textarea>
+            </div>
+          </div>
+          <br/>
+          <div class="row form-group">
+            <label class="col-sm-1 control-label"> קטגוריה</label>
+            <div class="col-sm-4">
+              <md-select ng-model="video.VideoTypeId" placeholder="בחר קטגוריה" name="VideoTypeId" required>
+                <md-option value="0">סרטונים מעניינים</md-option>
+                <md-option value="1">סרטונים לנוער</md-option>
+              </md-select>
+              <div class="errorMessage" ng-messages="videoForm.VideoTypeId.$error" ng-show="videoForm.$submitted">
+                <div ng-message="required" ng-show="videoForm.VideoTypeId.$error.required"> שדה זה הוא חובה.</div>
+              </div>
+            </div>
+            <div class="col-sm-1"></div>
+            <label class="col-sm-1 control-label">האם תוכן חופשי לגישה?</label>
+            <div class="col-sm-4">
+              <md-checkbox ng-model="video.IsAuthorizedContent" aria-label=""></md-checkbox>
+            </div>
+          </div>
+          <br/>
+
+          <br/>
+          <div class="row form-group">
+            <label class="col-sm-1 control-label">רשימת תגיות</label>
+            <div class="col-sm-4">
+              <md-chips ng-model="video.Tags" md-autocomplete-snap="" md-transform-chip="transformChip($chip)" md-require-match="true">
+                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in querySearch(searchText)" md-item-text="item.TagName" placeholder="בחר תגיות">
+                  <span md-highlight-text="searchText">{{item.TagName}}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                  <span>
+              <strong>{{$chip.TagName}}</strong>
+            </span>
+                </md-chip-template>
+              </md-chips>
+            </div>
+          </div>
+          <br/>
+          <br/>
+          <hr />
+          <br/>
+          <div class="row form-group">
+            <label class="col-sm-1 control-label">קישור לוידאו</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" name="name" ng-model="video.Url" required="">
+              <div  class="errorMessage" ng-messages="videoForm.Url.$error" ng-show="videoForm.$submitted">
+                <div ng-message="required" ng-show="videoForm.Url.$error.required"> שדה זה הוא חובה.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div type="submit" class="btn btn-lg btn-success" ng-click="save(videoForm.$valid)">
+    שמור
+  </div>
+</form>

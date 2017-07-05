@@ -1,0 +1,23 @@
+(function () {
+  'use strict';
+
+  /**
+   * @ngdoc service
+   * @name articleForm.factory:ArticleForm
+   *
+   * @description
+   *
+   */
+  angular
+    .module('articleForm')
+    .factory('ArticleForm', ArticleForm);
+
+  function ArticleForm() {
+    var ArticleFormBase = {};
+    ArticleFormBase.someValue = 'ArticleForm';
+    ArticleFormBase.someMethod = function () {
+      return 'ArticleForm';
+    };
+    return ArticleFormBase;
+  }
+}());

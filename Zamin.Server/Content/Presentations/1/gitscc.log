@@ -1,0 +1,15 @@
+20/07/2016 14:17:23 Get File Status: E:\Projects\cordio-server\WebServiceAPI\Web.config
+System.IO.IOException: The process cannot access the file 'E:\Projects\cordio-server\.git\index' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   at Sharpen.FileInputStream..ctor(String file)
+   at NGit.Dircache.DirCache.Read()
+   at NGit.Dircache.DirCache.Read(FilePath indexLocation, FS fs)
+   at NGit.Dircache.DirCache.Read(Repository repository)
+   at NGit.Repository.ReadDirCache()
+   at NGit.IndexDiff.Diff(ProgressMonitor monitor, Int32 estWorkTreeSize, Int32 estIndexSize, String title)
+   at NGit.IndexDiff.Diff()
+   at GitScc.GitFileStatusTracker.GetFileStatusNoCache(String fileName)
+   at GitScc.GitFileStatusTracker.GetFileStatus(String fileName)
+

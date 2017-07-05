@@ -1,0 +1,5 @@
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Consts\bin\Debug\Zamin.Consts.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Consts\bin\Debug\Zamin.Consts.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Consts\obj\Debug\Zamin.Consts.csprojResolveAssemblyReference.cache
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Consts\obj\Debug\Zamin.Consts.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Consts\obj\Debug\Zamin.Consts.pdb

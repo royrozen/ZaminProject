@@ -1,0 +1,129 @@
+<div class="home-bg">
+
+
+  <div class="section no-pad-bot" id="index-banner">
+    <div class="top-slider"><img src="Images/home-bg.png"></a>
+      <h2 class="haeder">עולם שלם של תוכן<br/>בנושא חינוך מיני</h2>
+    </div>
+
+    <div class="container">
+
+    </div>
+  </div>
+
+
+
+  <!-- <div class="text">
+
+    <br />
+  </div> -->
+  <!-- <div class="" layout="row">
+    <div>
+    </div>
+    <div>
+    </div>
+  </div> -->
+  <div class="container">
+    <md-card>
+      <md-card-content>
+        <h5 class="header center ">מערכת מידע זמין</h5>
+        <p class="top-article center ">,חינוך מיני הוא רק שם לקשת רחבה מאוד של נושאים: מגדר, זהות מינית, יחסים בין המינים, אהבה<br>
+           מוסר ועוד. בני נוער מחפשים הדרכה בנושאים הללו וזקוקים לה, ולדמויות החינוכיות בחייהם יש מקום<br>
+          וערך אדיר במשוואה הזאת. עם זאת, לעתים הנושאים הללו יכולים להיתפס כמאיימים, רגישים<br>
+            ומביכים, והנטייה הטבעית היא להימנע מלשוחח עליהם ולהציף אותם. ההדחקה הזאת  מביאה עמה<br>
+            תופעות קשות שכולנו פוגשים ומכירים אצל בני הנוער ואף אצלנו - בין היתר הטרדות מיניות, קשרים<br>
+            .לא בריאים, דימוי גוף שלילי ותודעה מינית מעוות</p>
+
+      </md-card-content>
+    </md-card>
+<br/>
+<br/>
+
+<!-- ***************************Parents********************************************* -->
+    <md-card class="parents-card">
+        <md-card-title class="center">
+          <md-card-title-text >
+            <span class="md-headline">הורים</span>
+            <span class="md-subhead ">כדאי לדעת:</span>
+          </md-card-title-text>
+        </md-card-title>
+        <md-card-content layout="row" layout-align="space-between">
+          <div flex="80">
+            <p class="center">
+          ,פלטפורמה להורים – בה תוכלו למצוא קורסים אונליין בתחומים שונים הנוגעים לנושא הכללי של חינוך מיני
+ומחולקים בארבע קטגוריות: <b>מגדר, מיניות בריאה, אלימות מינית. </b>
+              כל קורס מועבר ע"י אנשי מקצוע, והמידע המועבר שם הינו אמין, מקצועי, וחינוכי לחלוטין. כל קורס מורכב מכ-2-4
+              סרטונים כל אחד. לאחר שהורה משלים קורס, הוא יקבל אוטומטית למייל תוכן נוסף – כלי פרקטי
+              הקשור לקורס בו הוא צפה (למשל, תסריט שיחה או מדריך).
+            </p>
+            <md-card-actions layout="column" layout-align="start">
+            
+              <a ng-click="goTo('parents')"class="waves-effect waves-light orange btn">למעבר לדף הורים</a>
+            </md-card-actions>
+          </div>
+          <div flex="20">
+             <img src="Images/parents.png" class="md-card-image" alt="Washed Out">
+          </div>
+        </md-card-content>
+      </md-card>
+
+
+<!-- ***************************Teachers********************************************* -->
+      <md-card class="teachers-card">
+          <md-card-title class="center">
+            <md-card-title-text >
+              <span class="md-headline">מורים</span>
+              <span class="md-subhead ">כדאי לדעת:</span>
+            </md-card-title-text>
+          </md-card-title>
+          <md-card-content layout="row" layout-align="space-between">
+            <div flex="20">
+               <img src="Images/parents.png" class="md-card-image" alt="Washed Out">
+            </div>
+            <div flex="80">
+              <p class="center">
+            ,פלטפורמה להורים – בה תוכלו למצוא קורסים אונליין בתחומים שונים הנוגעים לנושא הכללי של חינוך מיני
+    ומחולקים בארבע קטגוריות: <b>מגדר, מיניות בריאה, אלימות מינית. </b>
+                כל קורס מועבר ע"י אנשי מקצוע, והמידע המועבר שם הינו אמין, מקצועי, וחינוכי לחלוטין. כל קורס מורכב מכ-2-4
+                סרטונים כל אחד. לאחר שהורה משלים קורס, הוא יקבל אוטומטית למייל תוכן נוסף – כלי פרקטי
+                הקשור לקורס בו הוא צפה (למשל, תסריט שיחה או מדריך).
+              </p>
+              <md-card-actions layout="column" layout-align="start">
+
+                  <a ng-click="goTo('teachers')"class="waves-effect waves-light orange btn">למעבר לדף מורים</a>
+              </md-card-actions>
+            </div>
+
+          </md-card-content>
+        </md-card>
+
+        <!-- ***************************Guides********************************************* -->
+              <md-card class="guides-card">
+                  <md-card-title class="center">
+                    <md-card-title-text >
+                      <span class="md-headline">מדריכים</span>
+                      <span class="md-subhead ">:כדאי לדעת</span>
+                    </md-card-title-text>
+                  </md-card-title>
+                  <md-card-content layout="row" layout-align="space-between">
+                    <div flex="80">
+                      <p class="center">
+                    ,פלטפורמה להורים – בה תוכלו למצוא קורסים אונליין בתחומים שונים הנוגעים לנושא הכללי של חינוך מיני
+            ומחולקים בארבע קטגוריות: <b>מגדר, מיניות בריאה, אלימות מינית. </b>
+                        כל קורס מועבר ע"י אנשי מקצוע, והמידע המועבר שם הינו אמין, מקצועי, וחינוכי לחלוטין. כל קורס מורכב מכ-2-4
+                        סרטונים כל אחד. לאחר שהורה משלים קורס, הוא יקבל אוטומטית למייל תוכן נוסף – כלי פרקטי
+                        הקשור לקורס בו הוא צפה (למשל, תסריט שיחה או מדריך).
+                      </p>
+                      <md-card-actions layout="column" layout-align="start">
+
+                        <a ng-click="goTo('guides')"class="waves-effect waves-light orange btn">למעבר לדף מדריכים</a>
+                      </md-card-actions>
+                    </div>
+                    <div flex="20">
+                       <img src="Images/parents.png" class="md-card-image" alt="Washed Out">
+                    </div>
+                  </md-card-content>
+                </md-card>
+
+  </div>
+</div>

@@ -1,0 +1,44 @@
+(function() {
+  'use strict';
+
+  /**
+   * @ngdoc object
+   * @name marketing.controller:MarketingCtrl
+   *
+   * @description
+   *
+   */
+  angular
+    .module('marketing')
+    .controller('MarketingCtrl', MarketingCtrl);
+
+  function MarketingCtrl($scope, $mdDialog, Marketing) {
+
+    $scope.Email = {};
+
+
+    $scope.sendMessageToClients = function(valid, ev) {
+
+      if (!valid) return;
+      showLoader();
+      Marketing.sendMessageToClients($scope.Email.address, $scope.Email.body, $scope.Email.subject).then(function(response) {
+        hideLoader();
+        $scope.errorMassage = "תקלה בשליחת אימייל";
+        if (response.data) {
+          $scope.errorMassage = "אימייל נשלח בהצלחה!";
+        }
+        $mdDialog.show({
+          targetEvent: ev,
+          templateUrl: 'errorDialog.html',
+          scope: $scope,
+          preserveScope: true,
+          clickOutsideToClose: true
+        });
+
+
+      })
+    }
+
+
+  }
+}());

@@ -1,0 +1,63 @@
+/**********************************************sign up, reset password**************************************************/
+#signUp {
+    input , label{
+      font-size: 18px;
+    }
+    md-input-container{
+      padding: 0;
+      input{
+        margin: 0;
+      }
+    }
+    md-card {padding: 1% 5%;}
+    md-select-menu md-option[selected] {
+      color: orange; 
+    }
+}
+#account,
+#resetPassword,
+#signUp {
+  font-size: 20px;
+}
+
+md-chips-wrap.md-chips{
+  justify-content: flex-start;
+    display: flex;
+}
+.mdp-datepicker {
+direction: ltr;
+}
+
+#resetPassword h2,
+#signUp h2,
+.license h2 {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ec9712;
+  height: 60px;
+  line-height: 60px;
+}
+#resetPassword .row,
+#signUp .row {
+  margin-bottom: 10px;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#resetPassword .row {
+  position: relative;
+  z-index: 999;
+}
+#signUp button.registration {
+  background-color: #ec9712;
+  min-width: 70%;
+  font-size: 28px;
+}
+#resetPassword button {
+  background-color: #ec9712;
+}
+.bold {
+  font-weight: bold;
+}
+/**********************************************Account****************************************************/

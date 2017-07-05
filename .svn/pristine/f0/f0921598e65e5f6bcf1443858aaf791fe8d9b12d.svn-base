@@ -1,0 +1,11 @@
+<footer layout="row">
+  <a href="#">
+    <img src="Images/twitter.png" />
+  </a>
+  <a href="https://www.youtube.com/channel/UCziRTyx306Fb5VxTqi6L67A" target="_blank">
+    <img src="Images/youtube.png" />
+  </a>
+  <a href="https://www.facebook.com/lagaatbeze/" target="_blank">
+    <img src="Images/facebook.png" />
+  </a>
+</footer>

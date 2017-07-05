@@ -1,0 +1,25 @@
+.sidenav-container {
+  direction: rtl;
+  width: 90%;
+  margin-left: 10%;
+  min-height: 82vh;
+  .page-sidenav {
+      background-color: #e5e5e5;
+    > div {
+      // border-bottom: 1px solid #a3a3a3;
+      font-size: 24px;
+      padding: 10px;
+      cursor: pointer;
+
+    }
+        > div.active,   > div:hover{
+          color: orange;
+        }
+  }
+  .page-content {
+    padding: 20px;
+    md-card{
+      cursor: pointer;
+    }
+  }
+}

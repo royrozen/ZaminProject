@@ -1,0 +1,80 @@
+<header>
+  <md-toolbar class="main-header md-tall md-warn md-hue-3" layout="row" dir="rtl">
+    <div class="logo" ng-click="goTo('home')" ng-class="{'active' : currentLocation == 'home'}">
+      <img src="Images/logo.png" />
+    </div>
+
+    <md-menu-bar flex>
+      <md-menu ng-click="goTo('media')" ng-class="{'active' : currentLocation == 'media'}">
+        תוכן
+      </md-menu>
+      <md-menu>
+        <span ng-click="$mdOpenMenu()">
+              הורים
+        </span>
+        <md-menu-content class="subMenu">
+          <md-menu-item>
+            <md-button ng-click="goTo('courses')">
+              קורסים
+            </md-button>
+          </md-menu-item>
+                  <!-- <md-menu-divider></md-menu-divider> -->
+          <!-- <md-menu-item><md-button ng-click="ctrl.toggleSetting('clearFormatting')">Clear Formatting</md-button></md-menu-item> -->
+        </md-menu-content>
+      </md-menu>
+      <md-menu>
+
+        <span ng-click="$mdOpenMenu()">
+              מורים
+        </span>
+        <md-menu-content class="subMenu">
+          <md-menu-item>
+            <md-button ng-click="goTo('courses')">
+              מערכי שיעור
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="goTo('courses')">
+              פוסטרים
+            </md-button>
+          </md-menu-item>
+                  <!-- <md-menu-divider></md-menu-divider> -->
+          <!-- <md-menu-item><md-button ng-click="ctrl.toggleSetting('clearFormatting')">Clear Formatting</md-button></md-menu-item> -->
+        </md-menu-content>
+      </md-menu>
+      <md-menu>
+
+        <span ng-click="$mdOpenMenu()">
+              מדריכים
+        </span>
+        <md-menu-content class="subMenu">
+          <md-menu-item>
+            <md-button ng-click="goTo('courses')">
+            מאגרי פעולות
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="goTo('courses')">
+              סרטונים מעניינים
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="goTo('courses')">
+              סרטונים לנוער
+            </md-button>
+          </md-menu-item>
+                  <!-- <md-menu-divider></md-menu-divider> -->
+          <!-- <md-menu-item><md-button ng-click="ctrl.toggleSetting('clearFormatting')">Clear Formatting</md-button></md-menu-item> -->
+        </md-menu-content>
+      </md-menu>
+      <md-menu>
+        <span ng-click="$mdOpenMenu()">
+              אודות
+        </span>
+      </md-menu>
+    </md-menu-bar>
+    <!-- <h2 class="md-toolbar-tools">
+    <span class="md-flex">Toolbar: tall with actions pin to the bottom (md-warn md-hue-3)</span>
+  </h2>-->
+  </md-toolbar>
+</header>

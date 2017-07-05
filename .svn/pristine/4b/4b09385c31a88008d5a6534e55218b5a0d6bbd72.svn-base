@@ -1,0 +1,44 @@
+/**********************************************sign up, reset password**************************************************/
+body #signUp{
+  direction: rtl;
+}
+#signUp, #account, #resetPassword {
+    font-size: 20px;
+}
+
+    #resetPassword h2, #signUp h2, .license h2 {
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+        color: #ec9712;
+        height: 60px;
+        line-height: 60px;
+    }
+
+    #signUp .row, #resetPassword .row {
+        margin-bottom: 10px;
+        width: 70%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    #resetPassword .row {
+        position: relative;
+        z-index: 999;
+    }
+
+#signUp button {
+        background-color: #ec9712;
+        min-width: 70%;
+        font-size: 28px;
+    }
+
+
+#resetPassword button {
+    background-color: #ec9712;
+}
+
+.bold {
+    font-weight: bold;
+}
+/**********************************************Account****************************************************/

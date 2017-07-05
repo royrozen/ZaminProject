@@ -1,0 +1,103 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Zamin.Models;
+using Amazon.SimpleEmail;
+using Amazon.SimpleEmail.Model;
+using Content = Amazon.SimpleEmail.Model.Content;
+        using System.Net;
+using System.Net.Mail;
+
+namespace Zamin.Helper
+{
+    public static class EmailHelper
+    {
+        public static bool SendContactUsEmail(string email,  WebsiteUser appUser)
+        {
+
+
+
+            string smtpAddress = "smtp.gmail.com";
+            int portNumber = 587;
+            bool enableSSL = true;
+
+            string emailFrom = "zaminproject@gmail.com";
+            string password = "47212126";
+            string emailTo = appUser.Email;
+            string subject = "הרשמתך לאתר זמין הצליחה!";
+            string body = "שלום" + appUser.FirstName + " " + appUser.LastName + " וברוך הבא לאתר! <br /> השרמתך הצליחה! <br />למעבר לאתר <a href='Zamin.muze.co.il'>לחץ כאן</a>";
+
+            using (MailMessage mail = new MailMessage())
+            {
+                mail.From = new MailAddress(emailFrom);
+                mail.To.Add(emailTo);
+                mail.Subject = subject;
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                // Can set to false, if you are sending pure text.
+
+                mail.Attachments.Add(new Attachment("C:\\Users\\RoyRozen\\Documents\\Visual Studio 2013\\Projects\\Zamin\\Zamin.Server\\Website\\zamin\\app\\Images\\logo.png"));
+              //  mail.Attachments.Add(new Attachment("C:\\SomeZip.zip"));
+
+                using (SmtpClient smtp = new SmtpClient(smtpAddress, portNumber))
+                {
+                    smtp.Credentials = new NetworkCredential(emailFrom, password);
+                    smtp.EnableSsl = enableSSL;
+                    smtp.Send(mail);
+                }
+            }
+
+
+
+
+
+
+            ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            //var from = "contact@bite-tech.co.il";  // Replace with your "From" address. This address must be verified.
+            //// sandbox, this address must be verified.
+
+            //var subjectStr = "zamin - הרשמה לאתר";
+
+            //var content = "שלום" + appUser.FirstName + " " + appUser.LastName + ", ";
+            //   content += "\n\n\n" + text;
+
+
+            //// Construct an object to contain the recipient address.
+            //Destination destination = new Destination();
+            //destination.ToAddresses = (new List<string>() { email });
+
+            //// Create the subject and body of the message.
+            //var subject = new Content(subjectStr);
+            //var textBody = new Content(content);
+            //var body = new Amazon.SimpleEmail.Model.Body(textBody);
+
+            //// Create a message with the specified subject and body.
+            //var message = new Message(subject, body);
+
+            //// Assemble the email.
+            //SendEmailRequest request = new SendEmailRequest(from, destination, message);
+            //Amazon.RegionEndpoint REGION = Amazon.RegionEndpoint.EUWest1;
+            //// Instantiate an Amazon SES client, which will make the service call.
+            //var client = new AmazonSimpleEmailServiceClient(Consts.AwsConsts.AWSAccessKeyId, Consts.AwsConsts.AWSSecretKey, REGION);
+
+            //// Send the email.
+            //try
+            //{
+            //    client.SendEmail(request);
+            //}
+            //catch (Exception ex)
+            //{
+            //    return false;
+            //}
+
+            return true;
+        }
+
+
+
+
+
+    }
+}

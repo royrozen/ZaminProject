@@ -1,0 +1,132 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Zamin.Enums;
+using Zamin.Helpers;
+using Zamin.Models;
+using Zamin.Models.Content;
+using Zamin.WebModels;
+
+namespace Zamin.Repositories
+{
+    public class ActivityRepository : RepositoryBase<DataContext>, IActivityRepository
+    {
+        public ActivityRepository()
+        {
+
+        }
+
+        public ActivityRepository(DataContext dataContext)
+            : base(dataContext)
+        {
+
+        }
+        public List<Activity> GetActivities()
+        {
+            return DataContext.Activity.Where(a => a.IsActive).ToList();
+        }
+
+        public Activity GetActivity(int activityId)
+        {
+            return DataContext.Activity.Include(a=>a.Tags).FirstOrDefault(a => a.Id == activityId);
+
+        }
+
+        public bool CreateActivity(ActivityWebModel activity)
+        {
+            var dbModel = AutoMapper.Mapper.Map<ActivityWebModel, Activity>(activity);
+
+            //Save tags
+            if (activity.Tags != null)
+            {
+                foreach (var tagWebModel in activity.Tags)
+                {
+                    dbModel.Tags.Add(DataContext.Tags.First(t => t.Id == tagWebModel.Id));
+                }
+            }
+
+
+            //Save image file
+            var fileType = activity.File.FileName.Split('.');
+
+            var fileName = Guid.NewGuid() + "." + fileType[fileType.Length - 1];
+            dbModel.FileUrl = fileName;
+            dbModel.IsActive = true;
+            FileHelper.SaveFile(activity.File, DirectoriesEnum.Activities, fileName);
+
+            DataContext.Activity.Add(dbModel);
+            return Save();
+        }
+
+        public bool DeleteActivity(int activityId)
+        {
+            var activity = DataContext.Activity.FirstOrDefault(a => a.Id == activityId);
+            if (activity == null) return false;
+
+            activity.IsActive = false;
+            return Save();
+        }
+
+
+        public bool UpdateActivity(ActivityWebModel activity)
+        {
+            var dbModel = DataContext.Activity.Include(p => p.Tags).SingleOrDefault(a => a.Id == activity.Id);
+            if (dbModel == null) return false;
+
+            AutoMapper.Mapper.Map(activity, dbModel);
+
+            //save Tags
+            if (activity.Tags != null && activity.Tags.Count > 0)
+            {
+                foreach (var tagDb in dbModel.Tags.ToList())
+                {
+                    //Doesnt exist in webModel (removed by client)
+                    if (!activity.Tags.Any(t => t.Id == tagDb.Id))
+                    {
+                        dbModel.Tags.Remove(tagDb);
+                    }
+                }
+                foreach (var tagWebModel in activity.Tags.ToList())
+                {
+                    //Doesnt exist in db (added by client)
+                    if (!dbModel.Tags.Any(t => t.Id == tagWebModel.Id))
+                    {
+                        dbModel.Tags.Add(DataContext.Tags.First(t => t.Id == tagWebModel.Id));
+                    }
+                }
+            }
+            else //All tags were deleted
+            {
+                foreach (var tag in dbModel.Tags.ToList())
+                {
+                    dbModel.Tags.Remove(tag);
+                }
+            }
+            if (activity.File != null)
+            {
+                var fileType = activity.File.FileName.Split('.');
+                var fileName = Guid.NewGuid() + "." + fileType[fileType.Length - 1];
+                dbModel.FileUrl = fileName;
+                dbModel.IsActive = true;
+                FileHelper.SaveFile(activity.File, DirectoriesEnum.Activities, fileName);
+            }
+            return Save();
+        }
+
+        public bool LikeActivity(string loginToken, int activityId)
+        {
+            var user = DataContext.WebsiteUsers.FirstOrDefault(u => u.LoginToken == loginToken);
+            var activity = DataContext.Activity.Include(a=>a.WebsiteUserActivityLike).FirstOrDefault(l => l.Id == activityId);
+            if (user == null || activity == null) return false;
+            if (!activity.WebsiteUserActivityLike.Any(l => l.Id == user.Id))
+            {
+                activity.WebsiteUserActivityLike.Add(user);
+                activity.NumOfLikes++;
+            }
+            return Save();
+        }
+    }
+}

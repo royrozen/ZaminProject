@@ -1,0 +1,16 @@
+.teachers {
+  width: 100%;
+  margin: 0;
+  .page-content {
+    align-items: center;
+    display: flex;
+    #gallery img {
+      max-height: 30vw;
+    }
+  }
+  md-card{
+    padding: 20px;
+    text-align: right;
+  }
+
+}

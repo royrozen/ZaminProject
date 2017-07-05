@@ -1,0 +1,69 @@
+<div id="media" class="sidenav-container teachers" layout="row">
+  <div class="page-sidenav" flex="15">
+    <div ng-class="{'active' : currentTab == 'activities'}" ng-click="selectTab('activities')">
+      מאגר פעולות
+    </div>
+    <div ng-class="{'active' : currentTab == 'intrestingVideos'}" ng-click="selectTab('intrestingVideos')">
+      סרטונים מעניינים
+    </div>
+    <div ng-class="{'active' : currentTab == 'teenVideos'}" ng-click="selectTab('teenVideos')">
+      סרטונים לנוער
+    </div>
+  </div>
+  <div class="page-content" flex="85">
+
+    <div id="intrestingVideos" ng-show="currentTab == 'intrestingVideos'">
+
+      <div ng-repeat="video in intrestingVideos" class="text-center" style="outline: none;">
+        <div class="iframe-containerArticle">
+
+          <!-- <iframe ng-src="{{video.iframe}}" frameborder="0" allowfullscreen></iframe>
+          <div class="iframe-overlay">
+            <div ng-click="openVideoModal(video.iframe, $event)" class="iframe-btn">
+            </div>
+          </div> -->
+          <ng-youtube-embed video="video.Url" autoplay="false" color="white" >
+          </ng-youtube-embed>
+        </div>
+      </div>
+    </div>
+
+    <div id="teenVideos" ng-show="currentTab == 'teenVideos'">
+
+      <div ng-repeat="video in teenVideos" class="text-center" style="outline: none;">
+        <div class="iframe-containerArticle">
+
+          <!-- <iframe ng-src="{{video.iframe}}" frameborder="0" allowfullscreen></iframe>
+          <div class="iframe-overlay">
+            <div ng-click="openVideoModal(video.iframe, $event)" class="iframe-btn">
+            </div>
+          </div> -->
+          <ng-youtube-embed video="video.Url" autoplay="false" color="white" >
+          </ng-youtube-embed>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div id="activities" ng-show="currentTab == 'activities'">
+
+      <md-card ng-repeat="activity in activities" class="text-center" style="outline: none;">
+        <md-card-content>
+          <div class="iframe-containerActivity">
+            <div class="activity">
+              <h2>{{activity.Name}}</h2>
+              <p>
+                {{activity.Description}}
+              </p>
+              <md-button ng-click="downloadActivity(activity.Id)" class="md-button  md-primary md-raised"><i class="fa fa-download"></i>&nbsp;הורדת מערכים כתובים</md-button>
+            </div>
+          </div>
+        </md-card-content>
+        <div class="button hvr-icon-bounce" ng-click="likeActivity(activity);$event.stopPropagation();">{{activity.NumOfLikes}}</div>
+        <!-- <i style="outline: none;" class="fa fa-thumbs-o-up fa-2x " ng-click="likeActivity(activity);$event.stopPropagation();"></i> -->
+        <!-- <span>{{activity.NumOfLikes}}</span> -->
+      </md-card>
+    </div>
+  </div>
+</div>

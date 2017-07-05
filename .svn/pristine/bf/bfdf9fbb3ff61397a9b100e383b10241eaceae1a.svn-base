@@ -1,0 +1,33 @@
+(function () {
+  'use strict';
+
+  /**
+   * @ngdoc service
+   * @name videoForm.factory:VideoForm
+   *
+   * @description
+   *
+   */
+  angular
+    .module('videoForm')
+    .factory('VideoForm', VideoForm);
+
+  function VideoForm($http,consts) {
+    var VideoFormBase = {};
+
+    VideoFormBase.getVideo = function (videoId){
+          return $http({
+          method: "GET",
+          url: consts.serverUrl + "Video/GetVideo",
+          params: {
+            videoId: videoId
+          }
+        });
+      };
+
+
+
+    };
+    return VideoFormBase;
+  }
+}());

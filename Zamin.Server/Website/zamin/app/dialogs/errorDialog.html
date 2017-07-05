@@ -1,0 +1,22 @@
+<md-dialog class="errorDialog">
+        <md-toolbar class="md-primary ">
+            <div class="md-toolbar-tools">
+                <h4 class="center">היי את/ה...</h4>
+            </div>
+        </md-toolbar>
+        <h3 class="dialog-title">על מנת לצפות בכל התכנים שבאתר, כל מה שצריך לעשות זה להירשם...</h3>
+
+        <div layout-gt-sm="row" class="layout-gt-sm-row">
+            <div>
+                <button class="md-raised md-button md-ink-ripple" ng-click="hideDialog() ; goTo('registration')">
+                    <span class="ng-scope"><i class="fa fa-id-card" aria-hidden="true"></i>&nbsp;הרשמה</span>
+                    <div class="md-ripple-container"></div>
+                </button>
+                <button class="md-raised md-button md-ink-ripple" ng-click="hideDialog()">
+                    <span class="ng-scope"><i class="fa fa-times"></i>&nbsp;לא כעת</span>
+                    <div class="md-ripple-container"></div>
+                </button>
+            </div>
+        </div>
+
+</md-dialog>

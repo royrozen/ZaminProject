@@ -1,0 +1,276 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.IO.Compression;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Newtonsoft.Json;
+using Zamin.Models.Content;
+using Zamin.Models.General;
+using Zamin.WebModels;
+
+namespace Zamin.Server.Controllers
+{
+    public class WebsiteController : BaseController
+    {
+        /**********************************************************************/
+        /**************************Media Content Page**************************/
+        /**********************************************************************/
+        public ActionResult GetContentPageData(string loginToken)
+        {
+            var isAuthenticated = UOW.WebUserRepository.IsAuthenticated(loginToken);
+            var videos = UOW.VideoRepository.GetYouTubeVideos(isAuthenticated);
+            videos.Reverse();
+            var videosWebModels = videos.Select(AutoMapper.Mapper.Map<Video, VideoWebModel>);
+
+            var articles = UOW.ArticleRepository.GetArticles();
+            if (!isAuthenticated) articles = articles.Where(a => !a.IsAuthorizedContent).ToList();
+            articles.Reverse();
+            var articlesWebModels = articles.Select(AutoMapper.Mapper.Map<Article, ArticleWebModel>);
+
+            var gallery = UOW.GalleryImageRepository.GetGalleryImages();
+            if (!isAuthenticated) gallery = gallery.Where(a => !a.IsAuthorizedContent).ToList();
+            gallery.Reverse();
+            var galleryWebModels = gallery.Select(AutoMapper.Mapper.Map<GalleryImage, GalleryImageWebModel>);
+
+            return new JsonResult()
+            {
+                Data = new
+                {
+                    videos = videosWebModels,
+                    articles = articlesWebModels,
+                    galleryImages = galleryWebModels
+                },
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public FileResult GetArticleFile(int articleId)
+        {
+            var article = UOW.ArticleRepository.GetArticle(articleId);
+            if (article == null || string.IsNullOrEmpty(article.FileUrl)) return null;
+
+            var filePath = Consts.GlobalConsts.ServerDirectory + Consts.DirectoriesConsts.ArticlesFolder + "/" +
+                           article.FileUrl;
+
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(filePath);
+            //    string fileName = "myfile.ext";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, article.FileUrl);
+            //   return System.IO.File.OpenRead(filePath);
+        }
+
+        /**********************************************************************/
+        /***************************** Guide Page ****************************/
+        /**********************************************************************/
+
+        public JsonResult GetGuidesData(string loginToken)
+        {
+            var isAuthenticated = false;
+            if (loginToken != null)
+            {
+                 isAuthenticated = UOW.WebUserRepository.IsAuthenticated(loginToken);
+            }
+
+
+            //var videos = UOW.VideoRepository.GetVideos();
+            //if (!isAuthenticated) videos = videos.Where(a => !a.IsAuthorizedContent).ToList();
+
+            //var teenvideos = videos.Where(v => v.VideoType == Enums.VideoType.Youth);
+            //var teenVideoWebModel = teenvideos.Select(AutoMapper.Mapper.Map<Video, VideoWebModel>);
+
+
+            //var intrestingVideos = videos.Where(v => v.VideoType == Enums.VideoType.YouTube);
+            //var intrestingVideoWebModel = intrestingVideos.Select(AutoMapper.Mapper.Map<Video, VideoWebModel>);
+
+
+
+            var Activities = UOW.ActivityRepository.GetActivities();
+            if (!isAuthenticated) Activities = Activities.Where(a => !a.IsAuthorizedContent).ToList();
+            var activitiesWebModel = Activities.Select(AutoMapper.Mapper.Map<Activity, ActivityWebModel>);
+
+
+            var intrestingVideos = UOW.VideoRepository.GetVideos(0);// 0 = VideoType of intresting videos
+            if (!isAuthenticated) intrestingVideos = intrestingVideos.Where(a => !a.IsAuthorizedContent).ToList();
+            var intrestingVideoWebModel = intrestingVideos.Select(AutoMapper.Mapper.Map<Video, VideoWebModel>);
+           
+
+            var teenvideos = UOW.VideoRepository.GetVideos(1);// 0 = VideoType of teens videos
+            if (!isAuthenticated) teenvideos = teenvideos.Where(a => !a.IsAuthorizedContent).ToList();
+            var teenVideoWebModel = teenvideos.Select(AutoMapper.Mapper.Map<Video, VideoWebModel>);
+
+
+            return new JsonResult()
+            {
+                Data = new
+                {
+                    intrestingVideos= intrestingVideoWebModel,
+                    teenVideos = teenVideoWebModel,
+                    activities = activitiesWebModel
+                },
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public FileResult DownloadActivity()
+        {
+
+            var directory = Consts.GlobalConsts.ServerDirectory +
+                            Consts.DirectoriesConsts.ActivitiesFolder;
+            var destinationFile = Consts.GlobalConsts.ServerDirectory + Consts.DirectoriesConsts.ZipFolder + "/" + "/temp.zip";
+
+            if (System.IO.File.Exists(destinationFile))
+            {
+                System.IO.File.Delete(destinationFile);
+            }
+
+            ZipFile.CreateFromDirectory(directory + "/" , destinationFile);
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(destinationFile);
+            //    string fileName = "myfile.ext";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Zip, "activities.zip");
+        }
+
+
+
+
+
+
+        /**********************************************************************/
+        /***************************** Parent Page ****************************/
+        /**********************************************************************/
+
+        public JsonResult GetParentsPageData(string loginToken)
+        {
+             var isAuthenticated = UOW.WebUserRepository.IsAuthenticated(loginToken);
+
+            var categories = UOW.CategoryRepository.GetCategories();
+            if(!isAuthenticated){
+                foreach (var cat in categories)
+                {
+                    cat.Courses = cat.Courses.Where(a => !a.IsAuthorizedContent).ToList();
+                }
+            }
+            var categoriesWebModel = categories.Select(AutoMapper.Mapper.Map<CourseCategory, CourseCategoryWebModel>);
+
+            return new JsonResult()
+            {
+                Data = new
+                {
+                    categories = categoriesWebModel
+                },
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public JsonResult GetCourseLessons(int courseId, string loginToken)
+        {
+            var lessons = UOW.LessonRepository.GetLessonsByCourseId(courseId);
+            var isAuthenticated = UOW.WebUserRepository.IsAuthenticated(loginToken);
+            if (!isAuthenticated) lessons = lessons.Where(a => !a.IsAuthorizedContent).ToList();
+
+            var webModels = lessons.Select(AutoMapper.Mapper.Map<Lesson, LessonWebModel>);
+            return Json(webModels, JsonRequestBehavior.AllowGet);
+        }
+
+
+
+        /***********************************************************************/
+        /**************************** Teachers Page ****************************/
+        /**********************************************************************/
+
+        public JsonResult GetTeachersData(string loginToken)
+        {
+            var isAuthenticated = UOW.WebUserRepository.IsAuthenticated(loginToken);
+
+            var posters = UOW.PosterRepository.GetPosters();
+            if (!isAuthenticated) posters = posters.Where(a => !a.IsAuthorizedContent).ToList();
+            var postersWebModel = posters.Select(AutoMapper.Mapper.Map<Poster, PosterWebModel>);
+
+            
+
+
+            var lessonPlan = UOW.LessonPlanRepository.GetLessonPlans();
+            if (!isAuthenticated) lessonPlan = lessonPlan.Where(a => !a.IsAuthorizedContent).ToList();
+            var lessonPlanWebModel = lessonPlan.Select(AutoMapper.Mapper.Map<LessonPlan, LessonPlanWebModel>);
+
+            return new JsonResult()
+            {
+                Data = new
+                {
+                    posters = postersWebModel,
+                    lessonPlan = lessonPlanWebModel
+                },
+                JsonRequestBehavior = JsonRequestBehavior.AllowGet
+            };
+        }
+
+        public FileResult DownloadLessonPlanWritten(int lessonPlanId)
+        {
+
+            var directory = Consts.GlobalConsts.ServerDirectory +
+                            Consts.DirectoriesConsts.LessonPlansWrittenFolder;
+            var destinationFile = Consts.GlobalConsts.ServerDirectory + Consts.DirectoriesConsts.ZipFolder + "/" + "/temp.zip";
+
+            if (System.IO.File.Exists(destinationFile))
+            {
+                System.IO.File.Delete(destinationFile);
+            }
+
+            ZipFile.CreateFromDirectory(directory + "/" + lessonPlanId, destinationFile);
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(destinationFile);
+            //    string fileName = "myfile.ext";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Zip, "writtenLessonPlans.zip");
+        }
+
+        public FileResult DownloadLessonPlanPpt(int lessonPlanId)
+        {
+            var directory = Consts.GlobalConsts.ServerDirectory +
+                            Consts.DirectoriesConsts.LessonPlansPresentationsFolder;
+            var destinationFile = Consts.GlobalConsts.ServerDirectory + Consts.DirectoriesConsts.ZipFolder + "/" + "/temp.zip";
+
+            if (System.IO.File.Exists(destinationFile))
+            {
+                System.IO.File.Delete(destinationFile);
+            }
+
+            ZipFile.CreateFromDirectory(directory + "/" + lessonPlanId, destinationFile);
+
+            byte[] fileBytes = System.IO.File.ReadAllBytes(destinationFile);
+            //    string fileName = "myfile.ext";
+            return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Zip, "presentations.zip");
+        }
+
+
+        /***********************************************************************/
+        /******************************** Likes *******************************/
+        /**********************************************************************/
+
+        public JsonResult LikeLesson(string loginToken, int lessonId)
+        {
+           var success = UOW.LessonRepository.LikeLesson(loginToken, lessonId);
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LikeActivity(string loginToken, int activityId)
+        {
+            var success = UOW.ActivityRepository.LikeActivity(loginToken, activityId);
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LikePoster(string loginToken, int posterId)
+        {
+            var success = UOW.PosterRepository.LikePoster(loginToken, posterId);
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult LikeLessonPlan(string loginToken, int lessonPlanId)
+        {
+            var success = UOW.LessonPlanRepository.LikeLessonPlan(loginToken, lessonPlanId);
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+    }
+}

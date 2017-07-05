@@ -1,0 +1,155 @@
+<div id="signUp" ng-show="signUp">
+  <h2>
+        הרשמה
+    </h2>
+  <md-card class="container">
+    <form name="signupForm" novalidate>
+      <div layout="row">
+        <div>
+          <md-input-container>
+            <label>שם פרטי*</label>
+            <input type="text" ng-model="signupInfo.FirstName" name="FirstName" ng-required="true" maxlength="180" />
+
+          </md-input-container>
+          <div style="color: red; font-size: 12px;" ng-show="(signupForm.fullName.$dirty && signupForm.FirstName.$invalid) || (signupFormSubmitted && signupForm.FirstName.$invalid)">
+            <span ng-show="signupForm.FirstName.$error.required"><b>אנא הכנס שם פרטי</b></span>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div>
+          <md-input-container>
+            <label>שם משפחה*</label>
+            <input type="text" ng-model="signupInfo.LastName" name="LastName" ng-required="true" maxlength="180" />
+
+          </md-input-container>
+          <div style="color: red; font-size: 12px;" ng-show="(signupForm.LastName.$dirty && signupForm.LastName.$invalid) || (signupFormSubmitted && signupForm.LastName.$invalid)">
+            <span ng-show="signupForm.LastName.$error.required"><b>אנא הכנס שם משפחה</b></span>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <div layout="row">
+        <div>
+          <md-input-container>
+            <label>Email*</label>
+            <input type="email" ng-model="signupInfo.Email" name="Email" maxlength="250" required />
+
+          </md-input-container>
+          <div style="color: red; font-size: 12px;" ng-show="(signupForm.Email.$dirty && signupForm.Email.$invalid) || (signupFormSubmitted && signupForm.Email.$invalid)">
+            <span ng-show="signupForm.Email.$error.required"><b>אנא הכנס אימייל</b></span>
+          </div>
+          <div style="color: red; font-size: 12px;" ng-show="(signupForm.Email.$dirty && signupForm.Email.$invalid) || (signupFormSubmitted && signupForm.Email.$invalid)">
+            <span ng-show="signupForm.Email.$error.email"><b>אימייל לא תקין</b></span>
+          </div>
+          <div style="color: red; font-size: 12px;" ng-show="emailExists">
+            <span><b>אימייל קיים במערכת</b></span>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div>
+          <md-input-container>
+            <label>מספר נייד*</label>
+            <input type="text" ng-model="signupInfo.Phone" name="Phone" required maxlength="180" />
+
+          </md-input-container>
+          <div style="color: red; font-size: 12px;" ng-show="(signupForm.Phone.$dirty && signupForm.Phone.$invalid) || (signupFormSubmitted && signupForm.Phone.$invalid)">
+            <span ng-show="signupForm.Phone.$error.required"><b>אנא הכנס מספר נייד</b></span>
+          </div>
+          <div style="color: red; font-size: 12px;" ng-show="(signupForm.Phone.$dirty && signupForm.Phone.$invalid) || (signupFormSubmitted && signupForm.Phone.$invalid)">
+            <span ng-show="!signupForm.Phone.$valid && !signupForm.Phone.$error.required"><b>מספר לא תקין</b></span>
+          </div>
+        </div>
+      </div>
+      <br />
+      <div layout="row">
+        <div>
+          <md-input-container>
+            <label>סיסמא*</label>
+            <input type="password" ng-model="signupInfo.Password" name="password" required maxlength="30" />
+
+          </md-input-container>
+          <div style="color: red; font-size: 12px;" ng-show="(signupForm.password.$dirty && signupForm.password.$invalid) || (signupFormSubmitted && signupForm.password.$invalid)">
+            <span ng-show="signupForm.password.$error.required"><b>אנא הכנס סיסמא</b></span>
+          </div>
+          <div style="color: red; font-size: 12px;" ng-show="passwordTooShort">
+            <span><b>הסיסמא צריכה להכיל 6 תווים לפחות</b></span>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <div>
+          <md-input-container>
+            <label>חזור על הסיסמא*</label>
+            <input type="password" ng-model="signupInfo.ConfirmPassword" name="passwordConfirm" required maxlength="30" />
+
+          </md-input-container>
+          <div style="color: red; font-size: 12px;" ng-show="(signupForm.passwordConfirm.$dirty && signupForm.passwordConfirm.$invalid) || (signupFormSubmitted && signupForm.passwordConfirm.$invalid)">
+            <span ng-show="signupForm.passwordConfirm.$error.required && !wrongPassword"><b>אנא חזור על הסיסמא</b></span>
+          </div>
+          <div ng-show="wrongPassword" style="color: red; font-size: 12px;">
+            <span><b>הסיסמאות לא תואמות</b></span>
+          </div>
+        </div>
+      </div>
+      <br />
+
+      <div>
+        <label>תאריך לידה*</label>
+        <mdp-date-picker mdp-format="DD/MM/YYYY" ng-model="signupInfo.BirthdayDate"></mdp-date-picker>
+      </div>
+      <br />
+      <div>
+        <label>מין*</label>
+        <md-radio-group layout="row" ng-model="signupInfo.IsMale">
+          <md-radio-button value="true">זכר</md-radio-button>
+          <md-radio-button value="false"> נקבה </md-radio-button>
+        </md-radio-group>
+      </div>
+      <br />
+      <div>
+        <label>סוג משתמש*</label>
+        <md-radio-group ng-model="signupInfo.UserTypeId" layout="row">
+          <md-radio-button value="1">הורה</md-radio-button>
+          <md-radio-button value="2">מורה</md-radio-button>
+          <md-radio-button value="3">מדריך</md-radio-button>
+        </md-radio-group>
+      </div>
+      <br />
+      <div>
+        <label>תחומי עניין</label>
+        <!-- <md-chips ng-model="signupInfo.Tags" md-autocomplete-snap="" md-transform-chip="transformChip($chip)" md-require-match="true">
+        <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in querySearch(searchText)" md-item-text="item.TagName" placeholder="בחר תגיות">
+          <span md-highlight-text="searchText">{{item.TagName}}</span>
+        </md-autocomplete>
+        <md-chip-template>
+          <span>
+              <strong>{{$chip.TagName}}</strong>
+            </span>
+        </md-chip-template>
+      </md-chips> -->
+
+
+
+              <md-select class="col-sm-3" ng-model="signupInfo.tags" name="signupInfo.tags" placeholder="תחומי עניין" multiple>
+                <md-option ng-value="tag" ng-repeat="tag in tags">{{ tag.TagName }}</md-option>
+              </md-select>
+
+      </div>
+      <br />
+      <br />
+      <div layout="row">
+        <div flex="40">
+          <button class="registration" type="submit" ng-click="signUp();signupFormSubmitted = true;" id="purchaseBtn">
+          הרשמה
+        </button>
+          <p style="font-size: 11pt; text-align: right;">לחיצה על הכפתור מהווה הסכמה <a href="/pdfs/Eula.pdf" target="_blank">לתנאי התקנון</a></p>
+        </div>
+      </div>
+
+
+    </form>
+  </md-card>
+  <br />
+</div>
+
+<div ng-show="!signUp"></div>

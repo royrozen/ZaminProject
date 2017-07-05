@@ -1,0 +1,62 @@
+<header>
+  <md-toolbar class="main-header md-tall md-warn md-hue-3" layout="row" dir="rtl">
+    <div class="logo" ng-click="goTo('home')" ng-class="{'active' : currentLocation == 'home'}">
+      <img src="Images/logo.png" />
+    </div>
+
+    <md-menu-bar flex>
+      <md-menu ng-click="goTo('media')" ng-class="{'active' : currentLocation == 'media'}">
+        תוכן
+      </md-menu>
+      <md-menu ng-click="goTo('parents')" ng-class="{'active' : currentLocation == 'parents'}">
+              הורים
+      </md-menu>
+      <md-menu ng-click="goTo('teachers')" ng-class="{'active' : currentLocation == 'teachers'}">
+              מורים
+      </md-menu>
+      <md-menu>
+
+        <span ng-click="$mdOpenMenu()">
+              מדריכים
+        </span>
+        <md-menu-content class="subMenu">
+          <md-menu-item>
+            <md-button ng-click="goTo('courses')">
+            מאגרי פעולות
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="goTo('courses')">
+              סרטונים מעניינים
+            </md-button>
+          </md-menu-item>
+          <md-menu-item>
+            <md-button ng-click="goTo('courses')">
+              סרטונים לנוער
+            </md-button>
+          </md-menu-item>
+                  <!-- <md-menu-divider></md-menu-divider> -->
+          <!-- <md-menu-item><md-button ng-click="ctrl.toggleSetting('clearFormatting')">Clear Formatting</md-button></md-menu-item> -->
+        </md-menu-content>
+      </md-menu>
+      <md-menu>
+        <span ng-click="$mdOpenMenu()">
+              אודות
+        </span>
+        <md-menu-content></md-menu-content>
+      </md-menu>
+    </md-menu-bar>
+    <!-- <h2 class="md-toolbar-tools">
+    <span class="md-flex">Toolbar: tall with actions pin to the bottom (md-warn md-hue-3)</span>
+  </h2>-->
+  <div class="login-btn md-raised md-button" ng-click="loginDialog()" ng-hide="currentUser != undefined">
+    כניסה
+  </div>
+  <a class="login-btn md-raised md-button" ng-click="goTo('registration')"  ng-hide="currentUser != undefined">
+    הרשמה
+  </a>
+  <div class="login-btn md-raised md-button" ng-click="logOut()" ng-show="currentUser != undefined">
+    התנתק
+  </div>
+  </md-toolbar>
+</header>

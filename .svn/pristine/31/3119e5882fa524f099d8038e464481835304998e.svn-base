@@ -1,0 +1,73 @@
+<div class="panel panel-default ">
+  <div class="panel-heading">
+    <h3>
+  שיעורים בקורס {{courseName}}
+    </h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>שם הסירטון</th>
+                <th>תיאור</th>
+                <th>קישור</th>
+                <th>תאריך העלאה</th>
+                <th>מספר לייקים</th>
+                <th>מספר צפיות</th>
+                <th>האם תוכן חופשי?</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="lesson in lessons track by $index">
+                <td>{{$index+1}}</td>
+                <td>
+                  <span>{{lesson.Name}}</span>
+
+                </td>
+                <td>
+                  <span >{{lesson.Description}}</span>
+                </td>
+                <td>
+                    <span> {{lesson.VideoUrl}} </span>
+              </td>
+                <td>
+                    {{lesson.CreateDate.split(" ")[0]}}
+                </td>
+                <td>
+                  <span >{{lesson.NumOfLikes}}</span>
+
+                </td>
+                <td>
+                  <span >{{lesson.NumOfViews}}</span>
+
+                </td>
+                <td>
+                  <span ng-show="lesson.IsAuthorizedContent" > <i class="fa fa-check green"> </i> </span>
+                  <span ng-show="!lesson.IsAuthorizedContent" > <i class="fa fa-times red"> </i> </span>
+               </td>
+
+                <td>
+          <a href="#lesson-form/{{lesson.Id}}/{{courseId}}" class="mb-sm btn btn-warning" type="button" title="עריכה" >
+            <i class="fa fa-pencil"></i>
+          </a>
+          <button class="mb-sm btn btn-danger" type="button" title="מחיקה" ng-click="deleteDialog(lesson, $index, $event)">
+            <i class="fa fa-trash-o"></i>
+          </button>
+        </td>
+        </tr>
+
+        </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<a href="#lesson-form/{{courseId}}" class="md-button md-fab md-fab-bottom-right md-primary" title="הוספה" >
+  <i class="fa fa-plus"></i>
+</a>

@@ -1,0 +1,14 @@
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\Zamin.Models.dll.config
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\Zamin.Models.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\Zamin.Models.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\EntityFramework.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\EntityFramework.SqlServer.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\Newtonsoft.Json.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\EntityFramework.xml
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\EntityFramework.SqlServer.xml
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\Newtonsoft.Json.xml
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\obj\Release\Zamin.Models.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\obj\Release\Zamin.Models.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\Zamin.Enums.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\bin\Release\Zamin.Enums.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Models\obj\Release\Zamin.Models.csprojResolveAssemblyReference.cache

@@ -1,0 +1,57 @@
+.home-bg {
+      padding-bottom: 10%;
+  // background-image: url('../../Images/home-bg.png');
+  // background-size: cover;
+  min-height: 92vh;
+  .text {
+    display: flex;
+    direction: rtl;
+    padding: 5%;
+    font-size: 3vw;
+  }
+}
+md-card-actions a{
+  width: 50%;
+  margin-left: 15%;
+}
+.parents-card  md-card-actions a,
+.guides-card md-card-actions a{
+
+  margin-left: 30%;
+}
+// .guides-card md-card-actions a{
+//
+//   margin-left: 50%;
+// }
+
+.top-slider h2 {
+    position: absolute;
+    top: 200px;
+    right: 0;
+    // width: 100%;
+    padding-right: 5%;
+  }
+.section {
+  padding-top: 0!important;
+}
+.parents-card{
+  // width: 50%;
+    margin-left: 54%;
+}
+.teachers-card{
+  margin-right: 54%;
+  margin-top: -13%;
+}
+.guides-card{
+  margin-left: 54%;
+  margin-top: 0%;
+
+}
+
+.parents-card,
+.teachers-card,
+.guides-card{
+    img{
+    width: 100%
+  }
+}

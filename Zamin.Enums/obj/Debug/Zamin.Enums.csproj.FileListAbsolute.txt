@@ -1,0 +1,13 @@
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\Zamin.Enums.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\Zamin.Enums.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\obj\Debug\Zamin.Enums.csprojResolveAssemblyReference.cache
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\obj\Debug\Zamin.Enums.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\obj\Debug\Zamin.Enums.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\Newtonsoft.Json.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\System.Net.Http.Formatting.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\System.Web.Http.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\Newtonsoft.Json.xml
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\System.Net.Http.Formatting.xml
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\System.Web.Http.xml
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.Enums\bin\Debug\System.Web.Http.WebHost.xml

@@ -1,0 +1,5 @@
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.WebModels\bin\Release\Zamin.WebModels.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.WebModels\bin\Release\Zamin.WebModels.pdb
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.WebModels\obj\Release\Zamin.WebModels.csprojResolveAssemblyReference.cache
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.WebModels\obj\Release\Zamin.WebModels.dll
+C:\Users\RoyRozen\Documents\Visual Studio 2013\Projects\Zamin\Zamin.WebModels\obj\Release\Zamin.WebModels.pdb

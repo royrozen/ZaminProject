@@ -1,0 +1,45 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using Zamin.Models.Content;
+using Zamin.WebModels;
+
+namespace Zamin.Server.Controllers
+{
+    public class ActivityController : BaseController
+    {
+        // GET: Activity
+        public JsonResult GetActivities()
+        {
+            var activity = UOW.ActivityRepository.GetActivities();
+            var webModels = activity.Select(AutoMapper.Mapper.Map<Activity, ActivityWebModel>);
+            return Json(webModels, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetActivity(int activityId)
+        {
+            var activity = UOW.ActivityRepository.GetActivity(activityId);
+            var webModel = AutoMapper.Mapper.Map<Activity, ActivityWebModel>(activity);
+            return Json(webModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SaveActivity(ActivityWebModel activity)
+        {
+            var success = false;
+            success = activity.Id == 0 ? UOW.ActivityRepository.CreateActivity(activity) : UOW.ActivityRepository.UpdateActivity(activity);
+
+            return Json(success);
+        }
+
+        [HttpPost]
+
+        public JsonResult DeletePoster(int activityId)
+        {
+            var success = UOW.ActivityRepository.DeleteActivity(activityId);
+            return Json(success);
+        }
+    }
+}

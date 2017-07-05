@@ -1,0 +1,37 @@
+(function () {
+  'use strict';
+
+  /**
+   * @ngdoc service
+   * @name parents.factory:Parents
+   *
+   * @description
+   *
+   */
+  angular
+    .module('parents')
+    .factory('Parents', Parents);
+
+  function Parents($http, consts) {
+    var ParentsBase = {};
+
+    ParentsBase.getParentsData = function () {
+      return $http({
+        method: "GET",
+        url: consts.serverUrl + "Website/GetParentsPageData",
+        params: {loginToken: localStorage.getItem("loginToken")}
+      });
+    };
+
+    ParentsBase.getCourseLessons = function (courseId) {
+      return $http({
+        method: "GET",
+        url: consts.serverUrl + "Website/GetCourseLessons",
+        params: {courseId:courseId, loginToken: localStorage.getItem("loginToken")}
+      });
+    };
+
+
+    return ParentsBase;
+  }
+}());

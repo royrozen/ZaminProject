@@ -1,0 +1,147 @@
+<!-- Inline template with sidebar items markup and ng-directives-->
+<!-- <script type="text/ng-template" id="sidebar-renderer.html">
+   <span ng-if="item.heading">{{item.text}}</span><a ng-if="!item.heading" ng-href="{{$state.href(item.sref, item.params)}}" title="{{item.text}}"><div class="pull-right" ng-if="item.alert" ng-class="item.label || 'label label-success'">{{item.alert}}</div><em class="{{item.icon}}" ng-if="item.icon"></em><span>{{item.text}}</span></a><ul class="nav sidebar-subnav" ng-if="item.submenu" uib-collapse="isCollapse(pIndex)" ng-init="addCollapse(pIndex, item)"><li class="sidebar-subnav-header">{{item.text}}</li><li ng-repeat="item in item.submenu" ng-include="'sidebar-renderer.html'" ng-class="getMenuItemPropClasses(item)" ng-init="pIndex=(pIndex+'-'+$index); inSubmenu = true" ng-click="toggleCollapse(pIndex)"></li></ul>
+</script> -->
+<!-- START Sidebar (left)-->
+<div class="aside-inner">
+  <!-- ng-class="{'show-scrollbar': app.layout.asideScrollbar}" -->
+  <nav class="sidebar" sidebar="" sidebar-anyclick-close="">
+    <!-- START sidebar nav-->
+    <ul class="nav">
+      <!-- START user info-->
+      <li class="has-user-block">
+        <div uib-collapse="userBlockVisible">
+          <div class="item user-block">
+            <!-- User picture-->
+            <!-- <div class="user-block-picture">
+              <div class="user-block-status">
+                <img class="img-thumbnail img-circle" ng-src="{{user.picture}}" alt="Avatar" />
+                <div class="circle circle-success circle-lg"></div>
+              </div>
+            </div> -->
+            <!-- Name and Job-->
+            <div class="user-block-info">
+
+              <h3 class="user-block-name">נועם סופר</h3>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- END user info-->
+      <!-- Iterates over all sidebar items-->
+      <li class="nav-heading">
+        <span>ראשי</span>
+      </li>
+      <!-- <li ng-class="{'active' : currentLocation == 'home'}">
+        <a href="#home" md-ink-ripple="md-ink-ripple">
+          <em class="icon-home"></em>
+          <span class="ng-binding">בית</span>
+        </a>
+      </li> -->
+      <li ng-class="{'active' : currentLocation == 'home'}">
+        <a href="home" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-bar-chart-o"></em>
+          <span class="ng-binding">סטטיסטיקות</span>
+        </a>
+      </li>
+      <li ng-class="{'active' : currentLocation == 'user'}">
+        <a href="#user" md-ink-ripple="md-ink-ripple">
+          <em class="icon-user"></em>
+          <span class="ng-binding">משתמשים</span>
+        </a>
+      </li>
+
+      <li class="nav-heading">
+        <span>תפריט מידע זמין</span>
+      </li>
+      <li ng-class="{'active' : currentLocation == 'interestingVideos'}">
+        <a href="#interesting-videos" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-youtube"></em>
+          <span class="ng-binding">סירטונים מעניינים</span>
+        </a>
+      </li>
+      <li ng-class="{'active' : currentLocation == 'article'}">
+        <a href="#article" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-file-text" ></em>
+          <span class="ng-binding">מאמרים</span>
+        </a>
+      </li>
+      <li ng-class="{'active' : currentLocation == 'gallery'}">
+        <a href="#gallery" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-bars"></em>
+          <span class="ng-binding"> תמונות גלריה</span>
+        </a>
+      </li>
+        <li class="nav-heading">
+        <span>דף מורים</span>
+      </li>
+      <li ng-class="{'active' : currentLocation == 'posters'}">
+        <a href="#posters" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-file-powerpoint-o"></em>
+          <span class="ng-binding">פוסטרים</span>
+        </a>
+      </li>
+      <li ng-class="{'active' : currentLocation == 'lesson-plan'}">
+        <a href="#lesson-plan" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-book"></em>
+          <span class="ng-binding">מערכי שיעור</span>
+        </a>
+      </li>
+
+      <li class="nav-heading">
+        <span>דף מדריכים</span>
+      </li>
+      <li ng-class="{'active' : currentLocation == 'activity'}">
+        <a href="#activity" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-trophy"></em>
+          <span class="ng-binding">מאגר פעולות</span>
+        </a>
+      </li>
+        <li ng-class="{'active' : currentLocation == 'teenVideos'}">
+        <a href="#teen-videos" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-youtube"></em>
+          <span class="ng-binding">סירטונים לנוער</span>
+        </a>
+      </li>
+      <li class="nav-heading">
+        <span>דף הורים</span>
+      </li>
+      <li ng-class="{'active' : currentLocation == 'course'}">
+        <a href="#course" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-graduation-cap"></em>
+          <span class="ng-binding"> קורסים ושיעורים</span>
+        </a>
+      </li>
+      <li class="nav-heading">
+        <span>הגדרות נוספות</span>
+        </li>
+        <li ng-class="{'active' : currentLocation == 'tags'}">
+          <a href="#tags" md-ink-ripple="md-ink-ripple">
+            <em class="fa fa-tags"></em>
+            <span class="ng-binding"> תגיות</span>
+          </a>
+        </li>
+        <li ng-class="{'active' : currentLocation == 'categories'}">
+          <a href="#categories" md-ink-ripple="md-ink-ripple">
+            <em class="fa fa-bars"></em>
+            <span class="ng-binding"> קטגוריות</span>
+          </a>
+        </li>
+      <li ng-class="{'active' : currentLocation == 'marketing'}">
+        <a href="#marketing" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-bullseye"></em>
+          <span class="ng-binding">שיווק</span>
+        </a>
+      </li>
+      <!-- <li ng-class="{'active' : currentLocation == 'doughType'}">
+        <a href="#dough-type" md-ink-ripple="md-ink-ripple">
+          <em class="fa fa-adjust"></em>
+          <span class="ng-binding">אודות</span>
+        </a>
+      </li> -->
+    </ul>
+    <!-- END sidebar nav-->
+  </nav>
+</div>
+<!-- END Sidebar (left)-->

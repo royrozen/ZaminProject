@@ -1,0 +1,57 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Zamin.Models;
+using Amazon.SimpleEmail;
+using Amazon.SimpleEmail.Model;
+using Content = Amazon.SimpleEmail.Model.Content;
+
+namespace Zamin.Helper
+{
+    public static class EmailHelper
+    {
+        public static bool SendContactUsEmail(string email, string text, WebsiteUser appUser)
+        {
+            var from = "contact@bite-tech.co.il";  // Replace with your "From" address. This address must be verified.
+            // sandbox, this address must be verified.
+
+            var subjectStr = "zamin - הרשמה לאתר";
+
+            var content = "שלום" + appUser.FirstName + " " + appUser.LastName + ", ";
+               content += "\n\n\n" + text;
+
+
+            // Construct an object to contain the recipient address.
+            Destination destination = new Destination();
+            destination.ToAddresses = (new List<string>() { email });
+
+            // Create the subject and body of the message.
+            var subject = new Content(subjectStr);
+            var textBody = new Content(content);
+            var body = new Amazon.SimpleEmail.Model.Body(textBody);
+
+            // Create a message with the specified subject and body.
+            var message = new Message(subject, body);
+
+            // Assemble the email.
+            SendEmailRequest request = new SendEmailRequest(from, destination, message);
+            Amazon.RegionEndpoint REGION = Amazon.RegionEndpoint.EUWest1;
+            // Instantiate an Amazon SES client, which will make the service call.
+            var client = new AmazonSimpleEmailServiceClient(Consts.AwsConsts.AWSAccessKeyId, Consts.AwsConsts.AWSSecretKey, REGION);
+
+            // Send the email.
+            try
+            {
+                client.SendEmail(request);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+            return true;
+        }
+    }
+}

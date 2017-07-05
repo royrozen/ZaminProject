@@ -1,0 +1,80 @@
+<form class="custom-form" name="articleForm" novalidate="">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 ng-show="editMode">
+        עריכה -
+        {{::article.ArticleName}}
+      </h3>
+      <h3 ng-hide="editMode">
+      יצירת מאמר
+      </h3>
+    </div>
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div class="row form-group">
+            <label class="col-sm-1 control-label">שם הפוסטר</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" name="ArticleName" ng-model="article.ArticleName" required="">
+              <div  class="errorMessage" ng-messages="articleForm.ArticleName.$error" ng-show="articleForm.$submitted">
+                <div ng-message="required" ng-show="articleForm.ArticleName.$error.required"> שדה זה הוא חובה.</div>
+              </div>
+            </div>
+            <!-- <div class="col-sm-1"></div>
+            <label class="col-sm-1 control-label"> שם המאמר</label>
+            <div class="col-sm-4">
+              <textarea class="form-control" ng-model="article.ArticleName"></textarea>
+            </div> -->
+          </div>
+          <br/>
+          <div class="row form-group">
+
+            <div class="col-sm-1"></div>
+            <label class="col-sm-1 control-label">האם תוכן חופשי לגישה?</label>
+            <div class="col-sm-4">
+              <md-checkbox ng-model="article.IsAuthorizedContent" aria-label=""></md-checkbox>
+            </div>
+          </div>
+          <br/>
+
+          <br/>
+          <div class="row form-group">
+            <label class="col-sm-1 control-label">רשימת תגיות</label>
+            <div class="col-sm-4">
+              <md-chips ng-model="article.Tags" md-autocomplete-snap="" md-transform-chip="transformChip($chip)" md-require-match="true">
+                <md-autocomplete md-selected-item="selectedItem" md-search-text="searchText" md-items="item in querySearch(searchText)" md-item-text="item.TagName" placeholder="בחר תגיות">
+                  <span md-highlight-text="searchText">{{item.TagName}}</span>
+                </md-autocomplete>
+                <md-chip-template>
+                  <span>
+              <strong>{{$chip.TagName}}</strong>
+            </span>
+                </md-chip-template>
+              </md-chips>
+            </div>
+          </div>
+          <br/>
+          <br/>
+          <hr />
+          <br/>
+          <h3>תמונות</h3>
+          <div class="row form-group">
+            <label class="col-sm-1 control-label">קובץ המאמר</label>
+            <div class="col-sm-10">
+              <img class="imageThumbnail" onerror="imgError(this)" ng-src="{{article.ImageUrl}}" ng-show="article.ImageFile == undefined" />
+              <img class="imageThumbnail" ngf-src="article.ImageFile" />
+              <!-- <div ngf-select ng-model="article.ImageFile" ngf-multiple="true" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB">
+                <button class="btn btn-primary" type="file">
+                  <i class="fa fa-plus"></i>
+                </button>
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn btn-lg btn-success" ng-click="save(articleForm.$valid)">
+    שמור
+  </button>
+</form>

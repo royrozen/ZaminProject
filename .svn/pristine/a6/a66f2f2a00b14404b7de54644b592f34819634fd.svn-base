@@ -1,0 +1,39 @@
+<div class="sidenav-container teachers" layout="row">
+  <div class="page-sidenav" flex="15">
+    <div ng-class="{'active' : currentTab == 'posters'}" ng-click="selectTab('posters')">
+      פוסטרים
+    </div>
+    <div ng-class="{'active' : currentTab == 'lessonPlan'}" ng-click="selectTab('lessonPlan')">
+      מערכי שיעור
+    </div>
+  </div>
+  <div class="page-content" flex="85">
+    <div id="gallery" ng-show="currentTab == 'posters'">
+
+      <div ng-repeat="poster in posters" class="text-center" style="outline: none;">
+        <div class="iframe-containerArticle">
+          <img ng-src="{{poster.ImageUrl}}" ng-click="openImageModal(poster.ImageUrl, $event)" />
+        </div>
+      </div>
+    </div>
+
+
+    <div id="articles" ng-show="currentTab == 'lessonPlan'">
+
+      <md-card ng-repeat="plan in lessonPlan" class="text-center" style="outline: none;">
+        <md-card-content>
+        <div class="iframe-containerArticle">
+          <div class="article">
+            <h2>{{plan.Name}}</h2>
+            <p>
+              {{plan.Description}}
+            </p>
+            <md-button ng-click="downloadLessonPlanWritten(plan.Id)" class="md-button  md-primary md-raised"><i class="fa fa-download"></i>&nbsp;הורדת מערכים כתובים</md-button>
+            <md-button ng-click="downloadLessonPlanPpt(plan.Id)" class="md-button  md-primary md-raised"><i class="fa fa-download"></i>&nbsp; הורדת מצגות </md-button>
+          </div>
+        </div>
+        </md-card-content>
+      </md-card>
+    </div>
+  </div>
+</div>
